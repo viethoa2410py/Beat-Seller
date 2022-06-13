@@ -18,24 +18,25 @@ Future showDialogWidget(
     SmartDialog.dismiss();
     await Future.delayed(const Duration(milliseconds: 10));
   }
-  return SmartDialog.show(
-      widget: Dialog(
-    shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(2))),
-    child: Container(
-      constraints: const BoxConstraints(minHeight: 160),
-      child: ClipRRect(
-        borderRadius: const BorderRadius.all(Radius.circular(2)),
-        child: onConfirm != null
-            ? AlertDialogBuilder(context, text)
-                .setType(dialogType, showCloseBtn: showCloseBtn)
-                .setOnClickBtnConfirm(() {
-                onConfirm.call();
-              }).build()
-            : AlertDialogBuilder(context, text).setType(dialogType).build(),
+  return SmartDialog.show(builder: (_) {
+    return Dialog(
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(2))),
+      child: Container(
+        constraints: const BoxConstraints(minHeight: 160),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.all(Radius.circular(2)),
+          child: onConfirm != null
+              ? AlertDialogBuilder(context, text)
+                  .setType(dialogType, showCloseBtn: showCloseBtn)
+                  .setOnClickBtnConfirm(() {
+                  onConfirm.call();
+                }).build()
+              : AlertDialogBuilder(context, text).setType(dialogType).build(),
+        ),
       ),
-    ),
-  ));
+    );
+  });
 }
 
 /// Build double dialog confirm
@@ -252,11 +253,9 @@ void showLoadingDialog() {
     ),
   );
 
-  SmartDialog.show(
-      widget: dialog,
-      isLoadingTemp: false,
-      clickBgDismissTemp: false,
-      animationDurationTemp: const Duration(milliseconds: 200));
+  SmartDialog.show(builder: (_) {
+    return dialog;
+  });
 }
 
 void closeLoading() {

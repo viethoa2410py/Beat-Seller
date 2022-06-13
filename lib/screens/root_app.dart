@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hotel_booking/repository/user_repository.dart';
+import 'package:hotel_booking/screens/my_beat/my_beats.dart';
 import 'package:hotel_booking/screens/setting.dart';
 import 'package:hotel_booking/theme/color.dart';
 import 'package:hotel_booking/utils/constant.dart';
@@ -7,6 +9,7 @@ import 'package:hotel_booking/widgets/bottombar_item.dart';
 import 'home.dart';
 
 class RootApp extends StatefulWidget {
+  static const id = "RootApp";
   const RootApp({Key? key}) : super(key: key);
 
   @override
@@ -15,7 +18,8 @@ class RootApp extends StatefulWidget {
 
 class _RootAppState extends State<RootApp> with TickerProviderStateMixin {
   int activeTabIndex = 0;
-  List barItems = [
+  List barItems = [];
+  List barItemsAdmin = [
     {
       "icon": "assets/icons/home.svg",
       "page": HomePage(),
@@ -28,10 +32,24 @@ class _RootAppState extends State<RootApp> with TickerProviderStateMixin {
       ),
     },
     {
-      "icon": "assets/icons/pin-area.svg",
+      "icon": "assets/icons/sound.svg",
+      "page": MyBeats(),
+    },
+    {
+      "icon": "assets/icons/setting.svg",
+      "page": SettingPage(),
+    },
+  ];
+  List barItemsUser = [
+    {
+      "icon": "assets/icons/home.svg",
+      "page": HomePage(),
+    },
+    {
+      "icon": "assets/icons/search.svg",
       "page": Container(
         alignment: Alignment.center,
-        child: Text("Nearby"),
+        child: Text("Explore"),
       ),
     },
     {
@@ -53,6 +71,16 @@ class _RootAppState extends State<RootApp> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    if (UserRepository.currentUser != null &&
+        UserRepository.currentUser!.role == "Admin") {
+      setState(() {
+        barItems = barItemsAdmin;
+      });
+    } else {
+      setState(() {
+        barItems = barItemsUser;
+      });
+    }
     _controller.forward();
   }
 

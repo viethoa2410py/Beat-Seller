@@ -32,11 +32,11 @@ class NotificationBox extends StatelessWidget {
                     style: TextStyle(color: Colors.white),
                   ),
                   child: SvgPicture.asset(
-                    "assets/icons/bell.svg",
+                    "assets/icons/cart.svg",
                     width: 20,
                     height: 20,
                   ))
-              : SvgPicture.asset("assets/icons/bell.svg")),
+              : SvgPicture.asset("assets/icons/cart.svg")),
     );
   }
 }

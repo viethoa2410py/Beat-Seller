@@ -5,7 +5,7 @@ abstract class AuthRepository {}
 class FireBaseAuthRepository extends AuthRepository {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
-  Future signInWithEmail(String email, String password) async {
+  Future signInWithEmail({required String email, required String password}) async {
     try {
       UserCredential result = await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
@@ -16,7 +16,7 @@ class FireBaseAuthRepository extends AuthRepository {
     }
   }
 
-  Future registerWithEmail(String email, String password) async {
+  Future registerWithEmail({required String email, required String password}) async {
     try {
       UserCredential result = await _firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password);

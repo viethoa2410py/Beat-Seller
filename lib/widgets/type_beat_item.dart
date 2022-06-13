@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_booking/theme/color.dart';
 
-class CityItem extends StatelessWidget {
-  CityItem({Key? key, required this.data, this.isSelected = false, this.onTap})
+class TypeBeatItem extends StatelessWidget {
+  TypeBeatItem({Key? key, required this.data, this.isSelected = false, this.onTap})
       : super(key: key);
   final data;
   final bool isSelected;
@@ -30,6 +30,7 @@ class CityItem extends StatelessWidget {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               data["name"],

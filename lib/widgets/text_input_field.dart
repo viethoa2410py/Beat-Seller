@@ -18,6 +18,7 @@ class AppTextInputField extends StatefulWidget {
       this.height,
       this.initialInputValue,
       this.style,
+      this.onChanged,
       this.validator});
 
   factory AppTextInputField.authVisibleInputText(
@@ -31,6 +32,7 @@ class AppTextInputField extends StatefulWidget {
       TextStyle? hintTextStyle,
       TextStyle? style,
       String? initialInputValue,
+      Function(String?)? onChanged,
       String? Function(String?)? validator}) {
     return AppTextInputField._(
       isObscureTextInput: false,
@@ -45,6 +47,7 @@ class AppTextInputField extends StatefulWidget {
       hintText: hintText,
       hintTextStyle: hintTextStyle,
       style: style,
+      onChanged: onChanged,
     );
   }
 
@@ -59,6 +62,7 @@ class AppTextInputField extends StatefulWidget {
       TextStyle? hintTextStyle,
       TextStyle? style,
       String? initialInputValue,
+      Function(String?)? onChanged,
       String? Function(String?)? validator}) {
     return AppTextInputField._(
       isObscureTextInput: true,
@@ -74,6 +78,7 @@ class AppTextInputField extends StatefulWidget {
       hintText: hintText,
       hintTextStyle: hintTextStyle,
       style: style,
+      onChanged: onChanged,
     );
   }
 
@@ -88,6 +93,7 @@ class AppTextInputField extends StatefulWidget {
       TextStyle? hintTextStyle,
       TextStyle? style,
       String? initialInputValue,
+      Function(String?)? onChanged,
       String? Function(String?)? validator}) {
     return AppTextInputField._(
       isObscureTextInput: true,
@@ -103,6 +109,7 @@ class AppTextInputField extends StatefulWidget {
       hintText: hintText,
       hintTextStyle: hintTextStyle,
       style: style,
+      onChanged: onChanged,
     );
   }
 
@@ -130,6 +137,7 @@ class AppTextInputField extends StatefulWidget {
 
   final TextStyle? style;
 
+  final Function(String?)? onChanged;
   @override
   State<AppTextInputField> createState() => _AppTextInputFieldState();
 }
@@ -161,20 +169,20 @@ class _AppTextInputFieldState extends State<AppTextInputField> {
         obscureText: _isObscurePassword ?? false,
         obscuringCharacter: '*',
         validator: widget.validator,
+        onChanged: widget.onChanged,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         decoration: InputDecoration(
           border: widget.outlineInputBorder ??
               OutlineInputBorder(
                   borderRadius: kDefaultBorder,
-                  borderSide:
-                      BorderSide(color: AppColors.redError, width: 1)),
+                  borderSide: BorderSide(color: AppColors.redError, width: 1)),
           isDense: true,
           hintText: widget.hintText,
           enabledBorder: widget.outlineInputBorder ??
               OutlineInputBorder(
                   borderRadius: kDefaultBorder,
                   borderSide:
-                     const BorderSide(color: AppColors.border, width: 1)),
+                      const BorderSide(color: AppColors.border, width: 1)),
           errorBorder: OutlineInputBorder(
               borderRadius: kDefaultBorder,
               borderSide:
@@ -188,20 +196,24 @@ class _AppTextInputFieldState extends State<AppTextInputField> {
           //       )
           //     : null,
           suffix: widget.isObscureTextInput
-              ? IconButton(
-                  icon: Icon(
-                    (_isObscurePassword ?? false)
-                        ? Icons.visibility_off_outlined
-                        : Icons.visibility_outlined,
-                    color: const Color(0xFFB5BBC9),
-                    size: 16,
-                  ),
-                  onPressed: () {
+              ? InkWell(
+                  onTap: () {
                     setState(() {
                       _isObscurePassword = !_isObscurePassword!;
                     });
                   },
-                ).square(16).pad(0, 5, 0)
+                  child: Container(
+                    width: 30,
+                    height: 30,
+                    child: Icon(
+                      (_isObscurePassword ?? false)
+                          ? Icons.visibility_off_outlined
+                          : Icons.visibility_outlined,
+                      color: const Color(0xFFB5BBC9),
+                      size: 16,
+                    ),
+                  ),
+                )
               : null,
         ),
       ),

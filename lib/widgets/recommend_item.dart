@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hotel_booking/models/model.dart';
 import 'package:hotel_booking/theme/color.dart';
 import 'custom_image.dart';
 
 class RecommendItem extends StatelessWidget {
   RecommendItem({Key? key, required this.data, this.onTap}) : super(key: key);
-  final data;
+  final BeatModel data;
   final GestureTapCallback? onTap;
 
   @override
@@ -12,7 +13,6 @@ class RecommendItem extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-          margin: EdgeInsets.only(right: 10),
           padding: EdgeInsets.all(10),
           width: 300,
           decoration: BoxDecoration(
@@ -30,7 +30,7 @@ class RecommendItem extends StatelessWidget {
           child: Row(
             children: [
               CustomImage(
-                data["image"],
+                data.thumbnail.image,
                 radius: 15,
                 height: 80,
               ),
@@ -42,7 +42,7 @@ class RecommendItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      data["name"],
+                      data.name,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
@@ -54,7 +54,7 @@ class RecommendItem extends StatelessWidget {
                       height: 5,
                     ),
                     Text(
-                      data["type"],
+                      data.type.name,
                       style: TextStyle(fontSize: 12, color: textColor),
                     ),
                     SizedBox(
@@ -70,19 +70,30 @@ class RecommendItem extends StatelessWidget {
                         SizedBox(
                           width: 3,
                         ),
-                        Expanded(
-                          child: Text(
-                            data["rate"],
-                            style: TextStyle(fontSize: 12, color: Colors.grey),
-                          ),
-                        ),
-                        Text(
-                          data["price"],
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: primary,
-                          ),
+                        Row(
+                          children: [
+                            Text(
+                              "\$${data.discount}",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: primary,
+                              ),
+                            ),
+                            if (data.discount != data.price)
+                              Padding(
+                                padding: const EdgeInsets.only(left: 5),
+                                child: Text(
+                                  "\$${data.price}",
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w500,
+                                    decoration: TextDecoration.lineThrough,
+                                    color: labelColor,
+                                  ),
+                                ),
+                              ),
+                          ],
                         ),
                       ],
                     ),

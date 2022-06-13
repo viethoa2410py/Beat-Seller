@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hotel_booking/models/model.dart';
 import 'package:hotel_booking/theme/color.dart';
 import 'package:hotel_booking/widgets/favorite_box.dart';
 import 'custom_image.dart';
@@ -12,7 +13,7 @@ class FeatureItem extends StatelessWidget {
       this.onTap,
       this.onTapFavorite})
       : super(key: key);
-  final data;
+  final BeatModel data;
   final double width;
   final double height;
   final GestureTapCallback? onTapFavorite;
@@ -43,7 +44,7 @@ class FeatureItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CustomImage(
-              data["image"],
+              data.thumbnail.image,
               width: double.infinity,
               height: 190,
               radius: 15,
@@ -55,7 +56,7 @@ class FeatureItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    data["name"],
+                    data.name,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -73,30 +74,46 @@ class FeatureItem extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            data["type"],
+                            data.type.name,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: TextStyle(color: labelColor, fontSize: 13),
+                            style: TextStyle(color: textColor, fontSize: 13),
                           ),
                           SizedBox(
                             height: 8,
                           ),
-                          Text(
-                            data["price"],
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                color: primary,
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600),
+                          Row(
+                            children: [
+                              Text(
+                                "\$${data.discount}",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: primary,
+                                ),
+                              ),
+                              if (data.discount != data.price)
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 5),
+                                  child: Text(
+                                    "\$${data.price}",
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500,
+                                      decoration: TextDecoration.lineThrough,
+                                      color: labelColor,
+                                    ),
+                                  ),
+                                ),
+                            ],
                           ),
                         ],
                       ),
-                      FavoriteBox(
-                        size: 16,
-                        onTap: onTapFavorite,
-                        isFavorited: data["is_favorited"],
-                      )
+                      // FavoriteBox(
+                      //   size: 16,
+                      //   onTap: onTapFavorite,
+                      //   isFavorited: data["is_favorited"],
+                      // )
                     ],
                   ),
                 ],

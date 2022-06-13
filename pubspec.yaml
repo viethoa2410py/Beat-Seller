@@ -1,7 +1,7 @@
 name: hotel_booking
 description: A new Flutter project.
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
 
@@ -18,33 +18,40 @@ dependencies:
   badges: ^2.0.2
   carousel_slider: ^4.0.0
   image_stack: ^2.1.1
-<<<<<<< HEAD
-=======
   firebase_auth: ^3.0.2
   firebase_core: ^1.5.0
   cloud_firestore: ^2.5.0
   get:
-  flutter_bloc: ^7.0.1
   equatable:
   uuid: ^3.0.5
-  flutter_smart_dialog: ^3.0.1
-
+  flutter_smart_dialog: ^4.3.6
+  just_audio: ^0.9.21
+  audio_service: ^0.18.4
+  firebase_database: ^9.0.8
+  freezed_annotation: ^2.0.3
+  bloc: ^8.0.3
+  flutter_bloc: ^8.0.1
+  intl: ^0.17.0
+  tuple: ^2.0.0
+  formz: ^0.4.1
+  firebase_storage: ^10.2.17
+  file_picker: ^4.6.1
+  image_picker: ^0.8.5+3
+  flutter_animated_dialog: ^2.0.1
 dependency_overrides:
-  firebase_auth_platform_interface: 6.1.11
-  cloud_firestore_platform_interface: 5.4.13  
->>>>>>> master
+  firebase_auth_platform_interface: 6.2.7
+  cloud_firestore_platform_interface: 5.5.7
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_lints: ^2.0.1
+  freezed: ^2.0.3+1
+  build_runner: ^2.1.11
+  json_serializable: ^6.2.0
 
 flutter:
   uses-material-design: true
 
   assets:
-<<<<<<< HEAD
     - assets/icons/
-    - assets/images/
-=======
-    - assets/icons/
->>>>>>> master

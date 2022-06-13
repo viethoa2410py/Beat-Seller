@@ -121,7 +121,7 @@ class AppButton extends StatelessWidget {
         ),
         onPressed: !disableButton
             ? () {
-                onTap?.call();
+                onTap!();
               }
             : null,
         child: child,
