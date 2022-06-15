@@ -77,7 +77,7 @@ class RegisterPageState extends State<RegisterPage> {
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          'Email'.desc().marg(0, 0, 20),
+          'Email'.desc(),
           AppTextInputField.authVisibleInputText(
             controller: _emailController,
             validator: (value) {
@@ -87,7 +87,7 @@ class RegisterPageState extends State<RegisterPage> {
               return null;
             },
           ).marg(0, 0, 6, 20),
-          'Display Name'.desc().marg(0, 0, 20),
+          'Display Name'.desc(),
           AppTextInputField.authVisibleInputText(
             controller: _displayNameController,
             validator: (value) {
