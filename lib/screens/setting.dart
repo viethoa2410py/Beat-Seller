@@ -109,7 +109,9 @@ class _SettingPageState extends State<SettingPage> {
                   height: 5,
                 ),
                 Text(
-                  "+84 905 897 174",
+                  UserRepository.currentUser != null
+                      ? UserRepository.currentUser!.email
+                      : "",
                   style: TextStyle(
                     color: labelColor,
                     fontSize: 14,
