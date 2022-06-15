@@ -296,15 +296,17 @@ class _TypeOfBeatWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
-      child: Wrap(
-        runSpacing: 8,
-        children: List.generate(
-          types.length,
-          (index) => Padding(
-            padding: const EdgeInsets.only(right: 8),
-            child: TypeBeatItem(
-              data: types[index],
-              onTap: () async {},
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: List.generate(
+            types.length,
+            (index) => Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: TypeBeatItem(
+                data: types[index],
+                onTap: () async {},
+              ),
             ),
           ),
         ),
