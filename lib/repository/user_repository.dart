@@ -26,13 +26,13 @@ class UserRepository {
     return null;
   }
 
-  static Future<UserModel?> register(email, password) async {
+  static Future<UserModel?> register(email, password, displayName) async {
     UserCredential user = await FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: password);
 
     if (user.user != null) {
       var _user = UserModel(
-          id: user.user!.uid, email: user.user!.email!, role: "Customer");
+          id: user.user!.uid, email: user.user!.email!, displayName: displayName,role: "Customer");
       await Api.createUser(_user);
       currentUser = _user;
       return _user;

@@ -89,7 +89,7 @@ class BaseAppBar extends StatelessWidget with PreferredSizeWidget {
               Icons.arrow_back,
               color: Colors.black,
             ).center().square(24).inkTap(onTap: () {
-              Get.back();
+              Navigator.pop(context);
             })
           : null,
       bottom: PreferredSize(

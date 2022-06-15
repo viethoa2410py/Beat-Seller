@@ -19,21 +19,24 @@ mixin _$AuthenticationEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String email, String password) login,
-    required TResult Function(String email, String password) register,
+    required TResult Function(String email, String password, String displayName)
+        register,
     required TResult Function() logout,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String email, String password)? login,
-    TResult Function(String email, String password)? register,
+    TResult Function(String email, String password, String displayName)?
+        register,
     TResult Function()? logout,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String email, String password)? login,
-    TResult Function(String email, String password)? register,
+    TResult Function(String email, String password, String displayName)?
+        register,
     TResult Function()? logout,
     required TResult orElse(),
   }) =>
@@ -153,7 +156,8 @@ class _$Login implements Login {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String email, String password) login,
-    required TResult Function(String email, String password) register,
+    required TResult Function(String email, String password, String displayName)
+        register,
     required TResult Function() logout,
   }) {
     return login(email, password);
@@ -163,7 +167,8 @@ class _$Login implements Login {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String email, String password)? login,
-    TResult Function(String email, String password)? register,
+    TResult Function(String email, String password, String displayName)?
+        register,
     TResult Function()? logout,
   }) {
     return login?.call(email, password);
@@ -173,7 +178,8 @@ class _$Login implements Login {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String email, String password)? login,
-    TResult Function(String email, String password)? register,
+    TResult Function(String email, String password, String displayName)?
+        register,
     TResult Function()? logout,
     required TResult orElse(),
   }) {
@@ -233,7 +239,7 @@ abstract class _$$RegisterCopyWith<$Res> {
   factory _$$RegisterCopyWith(
           _$Register value, $Res Function(_$Register) then) =
       __$$RegisterCopyWithImpl<$Res>;
-  $Res call({String email, String password});
+  $Res call({String email, String password, String displayName});
 }
 
 /// @nodoc
@@ -250,6 +256,7 @@ class __$$RegisterCopyWithImpl<$Res>
   $Res call({
     Object? email = freezed,
     Object? password = freezed,
+    Object? displayName = freezed,
   }) {
     return _then(_$Register(
       email: email == freezed
@@ -260,6 +267,10 @@ class __$$RegisterCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      displayName: displayName == freezed
+          ? _value.displayName
+          : displayName // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -267,16 +278,19 @@ class __$$RegisterCopyWithImpl<$Res>
 /// @nodoc
 
 class _$Register implements Register {
-  const _$Register({required this.email, required this.password});
+  const _$Register(
+      {required this.email, required this.password, required this.displayName});
 
   @override
   final String email;
   @override
   final String password;
+  @override
+  final String displayName;
 
   @override
   String toString() {
-    return 'AuthenticationEvent.register(email: $email, password: $password)';
+    return 'AuthenticationEvent.register(email: $email, password: $password, displayName: $displayName)';
   }
 
   @override
@@ -285,14 +299,17 @@ class _$Register implements Register {
         (other.runtimeType == runtimeType &&
             other is _$Register &&
             const DeepCollectionEquality().equals(other.email, email) &&
-            const DeepCollectionEquality().equals(other.password, password));
+            const DeepCollectionEquality().equals(other.password, password) &&
+            const DeepCollectionEquality()
+                .equals(other.displayName, displayName));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(email),
-      const DeepCollectionEquality().hash(password));
+      const DeepCollectionEquality().hash(password),
+      const DeepCollectionEquality().hash(displayName));
 
   @JsonKey(ignore: true)
   @override
@@ -303,32 +320,35 @@ class _$Register implements Register {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String email, String password) login,
-    required TResult Function(String email, String password) register,
+    required TResult Function(String email, String password, String displayName)
+        register,
     required TResult Function() logout,
   }) {
-    return register(email, password);
+    return register(email, password, displayName);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String email, String password)? login,
-    TResult Function(String email, String password)? register,
+    TResult Function(String email, String password, String displayName)?
+        register,
     TResult Function()? logout,
   }) {
-    return register?.call(email, password);
+    return register?.call(email, password, displayName);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String email, String password)? login,
-    TResult Function(String email, String password)? register,
+    TResult Function(String email, String password, String displayName)?
+        register,
     TResult Function()? logout,
     required TResult orElse(),
   }) {
     if (register != null) {
-      return register(email, password);
+      return register(email, password, displayName);
     }
     return orElse();
   }
@@ -371,10 +391,12 @@ class _$Register implements Register {
 abstract class Register implements AuthenticationEvent {
   const factory Register(
       {required final String email,
-      required final String password}) = _$Register;
+      required final String password,
+      required final String displayName}) = _$Register;
 
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
+  String get displayName => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$RegisterCopyWith<_$Register> get copyWith =>
       throw _privateConstructorUsedError;
@@ -420,7 +442,8 @@ class _$Logout implements Logout {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String email, String password) login,
-    required TResult Function(String email, String password) register,
+    required TResult Function(String email, String password, String displayName)
+        register,
     required TResult Function() logout,
   }) {
     return logout();
@@ -430,7 +453,8 @@ class _$Logout implements Logout {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String email, String password)? login,
-    TResult Function(String email, String password)? register,
+    TResult Function(String email, String password, String displayName)?
+        register,
     TResult Function()? logout,
   }) {
     return logout?.call();
@@ -440,7 +464,8 @@ class _$Logout implements Logout {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String email, String password)? login,
-    TResult Function(String email, String password)? register,
+    TResult Function(String email, String password, String displayName)?
+        register,
     TResult Function()? logout,
     required TResult orElse(),
   }) {

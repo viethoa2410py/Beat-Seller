@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hotel_booking/blocs/app_bloc.dart';
 import 'package:hotel_booking/blocs/bloc.dart';
+import 'package:hotel_booking/repository/repository.dart';
 
 import 'package:hotel_booking/screens/auth/login_page.dart';
 import 'package:hotel_booking/theme/color.dart';
@@ -95,7 +96,9 @@ class _SettingPageState extends State<SettingPage> {
                   height: 12,
                 ),
                 Text(
-                  "Viet Hoa",
+                  UserRepository.currentUser != null
+                      ? UserRepository.currentUser!.displayName
+                      : "Display Name",
                   style: TextStyle(
                     color: textColor,
                     fontSize: 20,

@@ -26,7 +26,9 @@ class RegisterPage extends StatefulWidget {
 
 class RegisterPageState extends State<RegisterPage> {
   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _displayNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _rePasswordController = TextEditingController();
   final _formKey = new GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -85,12 +87,36 @@ class RegisterPageState extends State<RegisterPage> {
               return null;
             },
           ).marg(0, 0, 6, 20),
+          'Display Name'.desc().marg(0, 0, 20),
+          AppTextInputField.authVisibleInputText(
+            controller: _displayNameController,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return "Input your display name";
+              }
+              return null;
+            },
+          ).marg(0, 0, 6, 20),
           'Password'.desc(),
           AppTextInputField.authObscureInputText(
             controller: _passwordController,
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return "Input your password";
+              }
+
+              return null;
+            },
+          ).marg(0, 0, 6, 20),
+          'Confirm Password'.desc(),
+          AppTextInputField.authObscureInputText(
+            controller: _rePasswordController,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return "Input confirm password";
+              }
+              if (value != _passwordController.text) {
+                return "Confirm password is incorrect";
               }
               return null;
             },
@@ -100,45 +126,46 @@ class RegisterPageState extends State<RegisterPage> {
               if (_formKey.currentState!.validate()) {
                 AppBloc.authenticationBloc.add(Register(
                     email: _emailController.text,
-                    password: _passwordController.text));
+                    password: _passwordController.text,
+                    displayName: _displayNameController.text));
               }
             },
             child: 'Confirm'.buttonTitle(),
             borderRadius: BorderRadius.circular(2),
           ),
-          Center(
-            child: SizedBox(
-              width: 160,
-              child: Column(
-                children: [
-                  'Register With'.liteGrey().b().marg(0, 0, 30, 15),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Image.asset(AppIcons.instaLogo)
-                          .square(40)
-                          .rectAll(20)
-                          .inkTap(onTap: () {
-                        showUnderDevelopmentFunction(context);
-                      }),
-                      SvgPicture.asset(AppIcons.googleLogo)
-                          .square(40)
-                          .rectAll(20)
-                          .inkTap(onTap: () {
-                        showUnderDevelopmentFunction(context);
-                      }),
-                      Image.asset(AppIcons.facebookLogo)
-                          .square(40)
-                          .rectAll(20)
-                          .inkTap(onTap: () {
-                        showUnderDevelopmentFunction(context);
-                      }),
-                    ],
-                  ),
-                ],
-              ).marg(16, 0),
-            ),
-          ),
+          // Center(
+          //   child: SizedBox(
+          //     width: 160,
+          //     child: Column(
+          //       children: [
+          //         'Register With'.liteGrey().b().marg(0, 0, 30, 15),
+          //         Row(
+          //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //           children: [
+          //             Image.asset(AppIcons.instaLogo)
+          //                 .square(40)
+          //                 .rectAll(20)
+          //                 .inkTap(onTap: () {
+          //               showUnderDevelopmentFunction(context);
+          //             }),
+          //             SvgPicture.asset(AppIcons.googleLogo)
+          //                 .square(40)
+          //                 .rectAll(20)
+          //                 .inkTap(onTap: () {
+          //               showUnderDevelopmentFunction(context);
+          //             }),
+          //             Image.asset(AppIcons.facebookLogo)
+          //                 .square(40)
+          //                 .rectAll(20)
+          //                 .inkTap(onTap: () {
+          //               showUnderDevelopmentFunction(context);
+          //             }),
+          //           ],
+          //         ),
+          //       ],
+          //     ).marg(16, 0),
+          //   ),
+          // ),
           'Already have an account?'
               .plain()
               .color(AppColors.textSecondary)

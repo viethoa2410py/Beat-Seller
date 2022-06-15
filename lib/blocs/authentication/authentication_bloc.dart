@@ -47,13 +47,15 @@ class AuthenticationBloc
 
   _register(Register event, Emitter<AuthenticationState> emit) async {
     emit(state.copyWith(status: AuthStatus.loading));
-    String? checkLoginError = verifyLogin(event.email, event.password);
+    String? checkLoginError = verifyLogin(event.email, event.password,
+        displayName: event.displayName);
     if (checkLoginError != null) {
       emit(state.copyWith(
           status: AuthStatus.error, errorString: checkLoginError));
     } else {
       try {
-        var user = await UserRepository.register(event.email, event.password);
+        var user = await UserRepository.register(
+            event.email, event.password, event.displayName);
         if (user != null) {
           emit(state.copyWith(status: AuthStatus.logged));
         }

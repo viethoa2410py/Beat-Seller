@@ -66,7 +66,15 @@ class Api {
       print(e);
     }
   }
+  static Future<dynamic> getDataAllBeats() async {
+    try {
+      final snapshot = await _database.ref('beats').get();
 
+      return snapshot.value;
+    } catch (e) {
+      print(e);
+    }
+  }
   static Future<dynamic> getDataMyBeats() async {
     try {
       final snapshot = await _database.ref('beats').get();

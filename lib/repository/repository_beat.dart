@@ -49,6 +49,25 @@ class BeatRepository {
     }
   }
 
+  static Future<List<BeatModel>> getAllBeats() async {
+    try {
+      final list = <BeatModel>[];
+
+      var data = await Api.getDataAllBeats();
+      if (data != null) {
+        data.forEach(
+            ((key, value) => list.add(BeatModel.fromJson(value, key))));
+        list.removeWhere((element) => element.isSold);
+        list.sort((a, b) => b.createDate.compareTo(a.createDate));
+      }
+
+      return list;
+    } catch (e) {
+      print(e);
+      return [];
+    }
+  }
+
   static Future<List<BeatModel>> getMyBeats(String userId) async {
     try {
       final list = <BeatModel>[];
@@ -123,7 +142,7 @@ class BeatRepository {
       final list = <CouponModel>[];
 
       var data = await Api.getCoupons();
-      if (data!= null) {
+      if (data != null) {
         data.forEach(((key, value) => list.add(CouponModel.fromJson(value))));
 
         list.sort((a, b) => a.value.compareTo(b.value));

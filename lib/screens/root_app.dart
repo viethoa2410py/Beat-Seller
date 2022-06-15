@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_booking/repository/user_repository.dart';
 import 'package:hotel_booking/screens/my_beat/my_beats.dart';
+import 'package:hotel_booking/screens/search_screen.dart';
 import 'package:hotel_booking/screens/setting.dart';
 import 'package:hotel_booking/theme/color.dart';
 import 'package:hotel_booking/utils/constant.dart';
@@ -26,10 +27,7 @@ class _RootAppState extends State<RootApp> with TickerProviderStateMixin {
     },
     {
       "icon": "assets/icons/search.svg",
-      "page": Container(
-        alignment: Alignment.center,
-        child: Text("Explore"),
-      ),
+      "page": SearchScreen(),
     },
     {
       "icon": "assets/icons/sound.svg",
@@ -47,10 +45,7 @@ class _RootAppState extends State<RootApp> with TickerProviderStateMixin {
     },
     {
       "icon": "assets/icons/search.svg",
-      "page": Container(
-        alignment: Alignment.center,
-        child: Text("Explore"),
-      ),
+      "page": SearchScreen(),
     },
     {
       "icon": "assets/icons/setting.svg",

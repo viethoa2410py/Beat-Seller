@@ -31,7 +31,11 @@ class LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BaseAppBar.lightAppBar(context: context, titleString: "Sign In"),
+      appBar: BaseAppBar.lightAppBar(
+        context: context,
+        titleString: "Sign In",
+        showBack: false,
+      ),
       body: SingleChildScrollView(
         child: BlocListener<AuthenticationBloc, AuthenticationState>(
           listener: (context, state) {
@@ -62,7 +66,7 @@ class LoginPageState extends State<LoginPage> {
     return Form(
       key: _formKey,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           'Email'.desc().marg(0, 0, 20),
           AppTextInputField.authVisibleInputText(
@@ -88,49 +92,50 @@ class LoginPageState extends State<LoginPage> {
             onTap: () {
               if (_formKey.currentState!.validate()) {
                 AppBloc.authenticationBloc.add(Login(
-                    email: _emailController.text,
-                    password: _passwordController.text));
+                  email: _emailController.text,
+                  password: _passwordController.text,
+                ));
               }
             },
             child: 'Confirm'.buttonTitle(),
             borderRadius: BorderRadius.circular(2),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              'Sign In With'.liteGrey().b().marg(0, 0, 30, 15),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image.asset(AppIcons.instaLogo).square(40).rectAll(20).inkTap(
-                      onTap: () {
-                    showUnderDevelopmentFunction(context);
-                  }),
-                  SizedBox(width: 10),
-                  SvgPicture.asset(AppIcons.googleLogo)
-                      .square(40)
-                      .rectAll(20)
-                      .inkTap(onTap: () {
-                    showUnderDevelopmentFunction(context);
-                  }),
-                  SizedBox(width: 10),
-                  Image.asset(AppIcons.facebookLogo)
-                      .square(40)
-                      .rectAll(20)
-                      .inkTap(onTap: () {
-                    showUnderDevelopmentFunction(context);
-                  }),
-                ],
-              ),
-            ],
-          ).marg(16, 0),
+          // Column(
+          //   crossAxisAlignment: CrossAxisAlignment.center,
+          //   children: [
+          //     'Sign In With'.liteGrey().b().marg(0, 0, 30, 15),
+          //     Row(
+          //       mainAxisAlignment: MainAxisAlignment.center,
+          //       crossAxisAlignment: CrossAxisAlignment.center,
+          //       children: [
+          //         Image.asset(AppIcons.instaLogo).square(40).rectAll(20).inkTap(
+          //             onTap: () {
+          //           showUnderDevelopmentFunction(context);
+          //         }),
+          //         SizedBox(width: 10),
+          //         SvgPicture.asset(AppIcons.googleLogo)
+          //             .square(40)
+          //             .rectAll(20)
+          //             .inkTap(onTap: () {
+          //           showUnderDevelopmentFunction(context);
+          //         }),
+          //         SizedBox(width: 10),
+          //         Image.asset(AppIcons.facebookLogo)
+          //             .square(40)
+          //             .rectAll(20)
+          //             .inkTap(onTap: () {
+          //           showUnderDevelopmentFunction(context);
+          //         }),
+          //       ],
+          //     ),
+          //   ],
+          // ).marg(16, 0),
           'Do not have account?'
               .plain()
               .color(AppColors.textSecondary)
               .b()
               .inkTap(onTap: () {
-                Navigator.pushReplacement(
+                Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const RegisterPage()),
                 );

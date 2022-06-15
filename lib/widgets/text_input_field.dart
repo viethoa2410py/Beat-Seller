@@ -67,11 +67,10 @@ class AppTextInputField extends StatefulWidget {
     return AppTextInputField._(
       isObscureTextInput: true,
       controller: controller,
-      contentPadding: contentPadding ??
-          const EdgeInsets.symmetric(vertical: 6, horizontal: 14),
+      contentPadding: contentPadding,
       outlineInputBorder: outlineInputBorder,
       enable: enable,
-      height: height ?? 40,
+      height: height ,
       inputType: inputType,
       validator: validator,
       initialInputValue: initialInputValue,
@@ -189,13 +188,9 @@ class _AppTextInputFieldState extends State<AppTextInputField> {
                   const BorderSide(color: AppColors.redError, width: 1)),
           contentPadding: widget.contentPadding ??
               const EdgeInsets.symmetric(vertical: 10.5, horizontal: 14),
-          // suffixIconConstraints: widget.isObscureTextInput
-          //     ? BoxConstraints(
-          //         minHeight: 12,
-          //         minWidth: 12,
-          //       )
-          //     : null,
-          suffix: widget.isObscureTextInput
+         
+       
+          suffixIcon: widget.isObscureTextInput
               ? InkWell(
                   onTap: () {
                     setState(() {
