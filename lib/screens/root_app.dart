@@ -108,6 +108,14 @@ class _RootAppState extends State<RootApp> with TickerProviderStateMixin {
       backgroundColor: appBgColor,
       bottomNavigationBar: getBottomBar(),
       body: getBarPage(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const ChatScreen()));
+        },
+        backgroundColor: Colors.green,
+        child: const Icon(Icons.chat),
+      ),
     );
   }
 
