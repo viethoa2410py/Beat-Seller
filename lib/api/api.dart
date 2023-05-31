@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:hotel_booking/models/model.dart';
-import 'package:hotel_booking/models/model_user.dart';
+import 'package:beatSeller/models/model.dart';
+import 'package:beatSeller/models/model_user.dart';
 
 class Api {
   ///Singleton factory
@@ -14,8 +14,8 @@ class Api {
   }
 
   Api._internal();
-  static FirebaseDatabase _database = FirebaseDatabase.instance;
-  static FirebaseStorage _storage = FirebaseStorage.instance;
+  static final FirebaseDatabase _database = FirebaseDatabase.instance;
+  static final FirebaseStorage _storage = FirebaseStorage.instance;
 
   static Future<dynamic> getUser(userId) async {
     try {
@@ -66,6 +66,7 @@ class Api {
       print(e);
     }
   }
+
   static Future<dynamic> getDataAllBeats() async {
     try {
       final snapshot = await _database.ref('beats').get();
@@ -75,6 +76,7 @@ class Api {
       print(e);
     }
   }
+
   static Future<dynamic> getDataMyBeats() async {
     try {
       final snapshot = await _database.ref('beats').get();

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_booking/models/model_coupon.dart';
-import 'package:hotel_booking/repository/repository.dart';
-import 'package:hotel_booking/theme/color.dart';
-import 'package:hotel_booking/widgets/coupon_item.dart';
+import 'package:beatSeller/models/model_coupon.dart';
+import 'package:beatSeller/repository/repository.dart';
+import 'package:beatSeller/theme/color.dart';
+import 'package:beatSeller/widgets/coupon_item.dart';
 
 class PopupCoupon extends StatefulWidget {
   const PopupCoupon({Key? key}) : super(key: key);

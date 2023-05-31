@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:audio_service/audio_service.dart';
-import 'package:hotel_booking/models/model.dart';
+import 'package:beatSeller/models/model.dart';
 
 import 'package:just_audio/just_audio.dart';
 
@@ -13,7 +13,6 @@ class AudioPlayerHandler extends BaseAudioHandler {
     return _instance;
   }
   AudioPlayerHandler._internal();
-
 
   final ErrorStream errorController = ErrorStream();
 
@@ -40,9 +39,6 @@ class AudioPlayerHandler extends BaseAudioHandler {
     await player.pause();
   }
 
-
-
-
   @override
   Future customAction(String name, [Map<String, dynamic>? extras]) async {
     if (name == 'dispose') {
@@ -52,7 +48,6 @@ class AudioPlayerHandler extends BaseAudioHandler {
       player.setVolume(extras!["volume"]);
     }
   }
-
 
   @override
   Future<void> setRepeatMode(AudioServiceRepeatMode repeatMode) async {

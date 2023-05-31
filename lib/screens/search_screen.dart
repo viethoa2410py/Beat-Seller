@@ -1,11 +1,13 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:hotel_booking/models/model.dart';
-import 'package:hotel_booking/repository/repository.dart';
-import 'package:hotel_booking/widgets/app_bar.dart';
-import 'package:hotel_booking/widgets/recommend_item.dart';
-import 'package:hotel_booking/widgets/search_widget.dart';
+import 'package:beatSeller/models/model.dart';
+import 'package:beatSeller/repository/repository.dart';
+import 'package:beatSeller/widgets/app_bar.dart';
+import 'package:beatSeller/widgets/recommend_item.dart';
+import 'package:beatSeller/widgets/search_widget.dart';
 
 import 'beat_detail.dart';
 
@@ -26,7 +28,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
     setState(() {
       this.allBeats = allBeats;
-      this.beats = allBeats;
+      beats = allBeats;
     });
   }
 
@@ -39,7 +41,11 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     appBar: BaseAppBar.lightAppBar(context: context, titleString: "Search"),
+      appBar: BaseAppBar.lightAppBar(
+        context: context,
+        titleString: "Search",
+        showBack: false,
+      ),
       body: Column(
         children: <Widget>[
           buildSearch(),
@@ -77,8 +83,8 @@ class _SearchScreenState extends State<SearchScreen> {
     }).toList();
 
     setState(() {
-      this.query = query;
-      this.beats = _beats;
+      query = query;
+      beats = _beats;
     });
   }
 

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hotel_booking/blocs/app_bloc.dart';
-import 'package:hotel_booking/blocs/bloc.dart';
-import 'package:hotel_booking/models/model.dart';
-import 'package:hotel_booking/repository/repository.dart';
-import 'package:hotel_booking/screens/my_cart/checkout.dart';
-import 'package:hotel_booking/theme/color.dart';
-import 'package:hotel_booking/utils/snack_bar.dart';
-import 'package:hotel_booking/widgets/custom_image.dart';
+import 'package:beatSeller/blocs/app_bloc.dart';
+import 'package:beatSeller/blocs/bloc.dart';
+import 'package:beatSeller/models/model.dart';
+import 'package:beatSeller/repository/repository.dart';
+import 'package:beatSeller/screens/my_cart/checkout.dart';
+import 'package:beatSeller/theme/color.dart';
+import 'package:beatSeller/utils/snack_bar.dart';
+import 'package:beatSeller/widgets/custom_image.dart';
 
 class BeatDetail extends StatefulWidget {
   final BeatModel beat;
@@ -112,7 +112,7 @@ class _BeatDetailState extends State<BeatDetail> {
               icon: Icon(Icons.cancel_outlined),
               color: primary,
               onPressed: () {
-                 AppBloc.audioPlayerBloc.add(PauseAudio());
+                AppBloc.audioPlayerBloc.add(PauseAudio());
                 Navigator.pop(context);
               },
             )),

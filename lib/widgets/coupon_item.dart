@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_booking/models/model_coupon.dart';
+import 'package:beatSeller/models/model_coupon.dart';
 
-import 'package:hotel_booking/theme/color.dart';
-import 'package:hotel_booking/utils/widget_extension.dart';
+import 'package:beatSeller/theme/color.dart';
 import 'package:intl/intl.dart';
 
 class CouponItem extends StatelessWidget {
@@ -13,7 +12,7 @@ class CouponItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
     loadDate() {
       final DateTime date = DateTime.parse(coupon.expirationDate);
       var req = DateFormat("dd-MM-yyyy").format(date);
@@ -24,7 +23,7 @@ class CouponItem extends StatelessWidget {
       color: appBgColor,
       child: Container(
         height: 80,
-        width: _size.width * 2 / 3,
+        width: size.width * 2 / 3,
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
         child: Row(
           children: [
@@ -37,22 +36,22 @@ class CouponItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "${coupon.code}".toUpperCase(),
-                        style: TextStyle(
+                        coupon.code.toUpperCase(),
+                        style: const TextStyle(
                           color: inActiveColor,
                           fontSize: 14,
                         ),
                       ),
                       Text(
                         coupon.name,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: mainColor,
                           fontSize: 14,
                         ),
                       ),
                       Text(
                         "Valid till ${loadDate()}",
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: inActiveColor,
                           fontSize: 10,
                         ),
@@ -68,11 +67,11 @@ class CouponItem extends StatelessWidget {
                   },
                   child: Container(
                       alignment: Alignment.center,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           border: Border(left: BorderSide(color: mainColor))),
-                      padding: EdgeInsets.all(10),
-                      margin: EdgeInsets.symmetric(vertical: 20),
-                      child: Text(
+                      padding: const EdgeInsets.all(10),
+                      margin: const EdgeInsets.symmetric(vertical: 20),
+                      child: const Text(
                         "User",
                         style: TextStyle(
                             color: primary,

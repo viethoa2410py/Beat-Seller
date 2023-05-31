@@ -1,5 +1,7 @@
-import 'package:hotel_booking/global/constant/color.dart';
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: prefer_const_constructors_in_immutables
+
+import 'package:beatSeller/global/constant/color.dart';
+
 import 'package:flutter/material.dart';
 
 class AppButton extends StatelessWidget {
@@ -7,12 +9,12 @@ class AppButton extends StatelessWidget {
   final Color? backgroundColor;
   final Widget? child;
   final Function? onTap;
-  final OutlinedBorder? shape;
+
   final BorderSide? side;
   final TextStyle? textStyle;
   final EdgeInsets? padding;
   final double? height;
-  final Brightness? brightness;
+
   final BorderRadius? borderRadius;
   final bool horizontalExpand;
   final bool disableButton;
@@ -22,13 +24,11 @@ class AppButton extends StatelessWidget {
       this.backgroundColor,
       this.child,
       this.onTap,
-      this.shape,
       this.side,
       this.textStyle,
       this.padding,
       this.borderRadius,
       this.height,
-      this.brightness,
       this.horizontalExpand = false,
       this.disableButton = false});
 
@@ -44,7 +44,6 @@ class AppButton extends StatelessWidget {
     bool? disableButton,
   }) {
     return AppButton._(
-      child: child,
       elevation: 0.0,
       backgroundColor: backgroundColor ?? const Color(0xFF444444),
       onTap: onTap,
@@ -54,6 +53,7 @@ class AppButton extends StatelessWidget {
       borderRadius: borderRadius ?? BorderRadius.circular(2),
       padding: padding ?? const EdgeInsets.symmetric(vertical: 5),
       disableButton: disableButton ?? false,
+      child: child,
     );
   }
 
@@ -71,7 +71,6 @@ class AppButton extends StatelessWidget {
     BorderSide? side,
   }) {
     return AppButton._(
-        child: child,
         elevation: 0.0,
         backgroundColor: backgroundColor ?? AppColors.primaryButton,
         onTap: onTap,
@@ -81,7 +80,8 @@ class AppButton extends StatelessWidget {
         padding: padding,
         side: side,
         disableButton: disableButton ?? false,
-        horizontalExpand: horizontalExpand ?? true);
+        horizontalExpand: horizontalExpand ?? true,
+        child: child);
   }
 
   factory AppButton.secondary(
@@ -110,10 +110,9 @@ class AppButton extends StatelessWidget {
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(backgroundColor),
           elevation: MaterialStateProperty.all(elevation),
-          shape: MaterialStateProperty.all(shape ??
-              RoundedRectangleBorder(
-                  side: side ?? _defSide,
-                  borderRadius: borderRadius ?? _defRadius)),
+          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+              side: side ?? _defSide,
+              borderRadius: borderRadius ?? _defRadius)),
           side: MaterialStateProperty.all(side),
           textStyle: MaterialStateProperty.all(textStyle),
           padding: MaterialStateProperty.all(padding ??

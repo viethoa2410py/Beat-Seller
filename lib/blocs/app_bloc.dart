@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hotel_booking/blocs/bloc.dart';
+import 'package:beatSeller/blocs/bloc.dart';
 
 class AppBloc {
   static final beatBloc = BeatBloc();

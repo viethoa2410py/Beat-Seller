@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hotel_booking/screens/auth/login_page.dart';
-import 'package:hotel_booking/screens/root_app.dart';
+import 'package:beatSeller/screens/auth/login_page.dart';
+import 'package:beatSeller/screens/root_app.dart';
 
 class AppRoute {
   static final AppRoute _singleton = AppRoute._internal();

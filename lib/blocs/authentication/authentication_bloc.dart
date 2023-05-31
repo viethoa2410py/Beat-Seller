@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hotel_booking/global/constant/error.dart';
-import 'package:hotel_booking/repository/repository.dart';
-import 'package:hotel_booking/utils/extension.dart';
+import 'package:beatSeller/global/constant/error.dart';
+import 'package:beatSeller/repository/repository.dart';
+import 'package:beatSeller/utils/extension.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';

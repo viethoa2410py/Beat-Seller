@@ -1,6 +1,5 @@
-import 'package:hotel_booking/global/constant/color.dart';
+import 'package:beatSeller/global/constant/color.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'configs/decoration_config.dart';
 import 'configs/textfield_config.dart';
 
@@ -66,7 +65,8 @@ class CustomTextField extends StatefulWidget {
       textFieldType: textFieldType ?? TextFieldType.text,
       decorationConfig: TextFieldDecorationConfig(
         isCollapsed: true,
-        contentPadding: contentPadding ?? const EdgeInsets.symmetric(vertical: 8, horizontal: 14),
+        contentPadding: contentPadding ??
+            const EdgeInsets.symmetric(vertical: 8, horizontal: 14),
         hintText: hintText,
         hintStyle: hintStyle,
         errorBorder: OutlineInputBorder(
@@ -79,10 +79,16 @@ class CustomTextField extends StatefulWidget {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(2.0),
-          borderSide: const BorderSide(color: AppColors.borderColor, width: 1.0),
+          borderSide:
+              const BorderSide(color: AppColors.borderColor, width: 1.0),
         ),
       ),
-      textFieldConfig: textFieldConfig ?? TextFieldConfig(maxLines: 1, style: style, controller: controller, readOnly: readOnly ?? false),
+      textFieldConfig: textFieldConfig ??
+          TextFieldConfig(
+              maxLines: 1,
+              style: style,
+              controller: controller,
+              readOnly: readOnly ?? false),
     );
   }
 
@@ -117,14 +123,21 @@ class CustomTextField extends StatefulWidget {
       textFieldType: textFieldType ?? TextFieldType.text,
       decorationConfig: TextFieldDecorationConfig(
         isCollapsed: true,
-        contentPadding: contentPadding ?? const EdgeInsets.symmetric(vertical: 6, horizontal: 14),
+        contentPadding: contentPadding ??
+            const EdgeInsets.symmetric(vertical: 6, horizontal: 14),
         hintText: hintText,
         hintStyle: hintStyle,
         showCounterText: '',
-        focusedBorder: OutlineInputBorder(borderRadius: borderRad, borderSide: focusBorderSid),
-        enabledBorder: OutlineInputBorder(borderRadius: borderRad, borderSide: borderSid),
+        focusedBorder: OutlineInputBorder(
+            borderRadius: borderRad, borderSide: focusBorderSid),
+        enabledBorder:
+            OutlineInputBorder(borderRadius: borderRad, borderSide: borderSid),
       ),
-      textFieldConfig: textFieldConfig ?? TextFieldConfig(style: style, controller: controller, readOnly: readOnly ?? false),
+      textFieldConfig: textFieldConfig ??
+          TextFieldConfig(
+              style: style,
+              controller: controller,
+              readOnly: readOnly ?? false),
     );
   }
 
@@ -152,7 +165,8 @@ class CustomTextField extends StatefulWidget {
       textFieldType: textFieldType ?? TextFieldType.text,
       decorationConfig: TextFieldDecorationConfig(
           isCollapsed: true,
-          contentPadding: contentPadding ?? const EdgeInsets.symmetric(vertical: 8, horizontal: 14),
+          contentPadding: contentPadding ??
+              const EdgeInsets.symmetric(vertical: 8, horizontal: 14),
           border: InputBorder.none,
           disabledBorder: InputBorder.none,
           focusedBorder: InputBorder.none,
@@ -176,7 +190,8 @@ class CustomTextField extends StatefulWidget {
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
-  late final TextEditingController? _controller = widget.textFieldConfig.controller;
+  late final TextEditingController? _controller =
+      widget.textFieldConfig.controller;
   bool _isObscureText = true;
 
   @override
@@ -191,7 +206,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
       textDirection: widget.textFieldConfig.textDirection,
       style: widget.textFieldConfig.style,
       autofocus: widget.textFieldConfig.autoFocus,
-      maxLines: widget.textFieldType == TextFieldType.password ? 1 : widget.textFieldConfig.maxLines,
+      maxLines: widget.textFieldType == TextFieldType.password
+          ? 1
+          : widget.textFieldConfig.maxLines,
       controller: _controller,
       autocorrect: widget.textFieldConfig.autocorrect,
       initialValue: widget.textFieldConfig.initialValue,
@@ -199,11 +216,15 @@ class _CustomTextFieldState extends State<CustomTextField> {
       cursorHeight: widget.textFieldConfig.cursorHeight,
       cursorWidth: widget.textFieldConfig.cursorWidth,
       cursorRadius: widget.textFieldConfig.cursorRadius,
-      textCapitalization: widget.textFieldType == TextFieldType.name ? TextCapitalization.words : TextCapitalization.none,
+      textCapitalization: widget.textFieldType == TextFieldType.name
+          ? TextCapitalization.words
+          : TextCapitalization.none,
       enabled: widget.textFieldConfig.isEnabled,
       enableSuggestions: widget.textFieldConfig.enableSuggestions,
       keyboardType: _getKeyboardType(),
-      obscureText: widget.textFieldType == TextFieldType.password ? _isObscureText : false,
+      obscureText: widget.textFieldType == TextFieldType.password
+          ? _isObscureText
+          : false,
       onChanged: widget.onChanged,
       onEditingComplete: widget.onEditingComplete,
       onFieldSubmitted: widget.onFieldSubmitted,
@@ -218,7 +239,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
             return _verifyData(value);
           },
       decoration: InputDecoration(
-        counterStyle: widget.decorationConfig.counterStyle ?? const TextStyle(height: double.minPositive, color: Colors.transparent),
+        counterStyle: widget.decorationConfig.counterStyle ??
+            const TextStyle(
+                height: double.minPositive, color: Colors.transparent),
         counterText: widget.decorationConfig.showCounterText,
         constraints: widget.decorationConfig.constraints,
         border: widget.decorationConfig.border,
@@ -226,12 +249,17 @@ class _CustomTextFieldState extends State<CustomTextField> {
         isCollapsed: widget.decorationConfig.isCollapsed ?? false,
         isDense: widget.decorationConfig.isDense ?? false,
         disabledBorder: widget.decorationConfig.disabledBorder,
-        focusedBorder: widget.decorationConfig.focusedBorder ?? _getTextFieldBorder(),
-        errorBorder: widget.decorationConfig.errorBorder ?? _getTextFieldBorder(isErrorType: true),
-        focusedErrorBorder: widget.decorationConfig.focusedErrorBorder ?? _getTextFieldBorder(isErrorType: true),
+        focusedBorder:
+            widget.decorationConfig.focusedBorder ?? _getTextFieldBorder(),
+        errorBorder: widget.decorationConfig.errorBorder ??
+            _getTextFieldBorder(isErrorType: true),
+        focusedErrorBorder: widget.decorationConfig.focusedErrorBorder ??
+            _getTextFieldBorder(isErrorType: true),
         enabled: widget.decorationConfig.enabled,
-        enabledBorder: widget.decorationConfig.enabledBorder ?? _getTextFieldBorder(),
-        errorStyle: widget.decorationConfig.errorStyle ?? TextStyle(color: Theme.of(context).colorScheme.error, fontSize: 12),
+        enabledBorder:
+            widget.decorationConfig.enabledBorder ?? _getTextFieldBorder(),
+        errorStyle: widget.decorationConfig.errorStyle ??
+            TextStyle(color: Theme.of(context).colorScheme.error, fontSize: 12),
         fillColor: widget.decorationConfig.fillColor,
         filled: widget.decorationConfig.filled,
         floatingLabelStyle: widget.decorationConfig.floatingLabelStyle,
@@ -259,11 +287,15 @@ class _CustomTextFieldState extends State<CustomTextField> {
       return widget.decorationConfig.suffixIcon;
     }
 
-    if (widget.textFieldType == TextFieldType.password && widget.decorationConfig.showVisiblePasswordIcon) {
+    if (widget.textFieldType == TextFieldType.password &&
+        widget.decorationConfig.showVisiblePasswordIcon) {
       return IconButton(
         icon: Icon(
-          _isObscureText ? Icons.visibility_off_outlined : Icons.visibility_outlined,
-          color: widget.decorationConfig.visiblePasswordIconColor ?? Colors.grey,
+          _isObscureText
+              ? Icons.visibility_off_outlined
+              : Icons.visibility_outlined,
+          color:
+              widget.decorationConfig.visiblePasswordIconColor ?? Colors.grey,
         ),
         splashColor: widget.decorationConfig.suffixBtnSplashColor,
         highlightColor: widget.decorationConfig.suffixBtnHighlightColor,
@@ -274,6 +306,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         },
       );
     }
+    return null;
   }
 
   TextInputType _getKeyboardType() {
@@ -296,8 +329,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   OutlineInputBorder _getTextFieldBorder({bool isErrorType = false}) {
     var defaultBorder = OutlineInputBorder(
-      borderSide: BorderSide(color: isErrorType ? Colors.red : Colors.grey, width: 0.5),
-      borderRadius: widget.borderRadius ?? const BorderRadius.all(Radius.circular(4.0)),
+      borderSide:
+          BorderSide(color: isErrorType ? Colors.red : Colors.grey, width: 0.5),
+      borderRadius:
+          widget.borderRadius ?? const BorderRadius.all(Radius.circular(4.0)),
     );
 
     return defaultBorder;

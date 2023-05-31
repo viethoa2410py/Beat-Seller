@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_booking/blocs/app_bloc.dart';
-import 'package:hotel_booking/blocs/bloc.dart';
-import 'package:hotel_booking/models/model.dart';
-import 'package:hotel_booking/models/model_coupon.dart';
-import 'package:hotel_booking/repository/repository.dart';
-import 'package:hotel_booking/screens/my_cart/complete.dart';
-import 'package:hotel_booking/theme/color.dart';
-import 'package:hotel_booking/utils/widget_extension.dart';
-import 'package:hotel_booking/widgets/coupon_item.dart';
-import 'package:hotel_booking/widgets/text_input_field.dart';
+import 'package:beatSeller/blocs/app_bloc.dart';
+import 'package:beatSeller/blocs/bloc.dart';
+import 'package:beatSeller/models/model.dart';
+import 'package:beatSeller/models/model_coupon.dart';
+import 'package:beatSeller/repository/repository.dart';
+import 'package:beatSeller/screens/my_cart/complete.dart';
+import 'package:beatSeller/theme/color.dart';
+import 'package:beatSeller/utils/widget_extension.dart';
+import 'package:beatSeller/widgets/coupon_item.dart';
+import 'package:beatSeller/widgets/text_input_field.dart';
 
 class Checkout extends StatefulWidget {
   final List<BeatModel> beatsToBuy;
@@ -51,15 +51,16 @@ class _CheckoutState extends State<Checkout> {
       backgroundColor: darker,
       body: CustomScrollView(
         slivers: [
-          _AppBarWidget(),
+          const _AppBarWidget(),
           SliverToBoxAdapter(
             child: SingleChildScrollView(
                 child: Column(
               children: [
                 Container(
                   color: appBgColor,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  margin: EdgeInsets.only(top: 2),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  margin: const EdgeInsets.only(top: 2),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
@@ -77,12 +78,13 @@ class _CheckoutState extends State<Checkout> {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Container(
                   color: appBgColor,
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
@@ -106,7 +108,7 @@ class _CheckoutState extends State<Checkout> {
                             ),
                           ),
                         ),
-                        Divider(),
+                        const Divider(),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -121,11 +123,11 @@ class _CheckoutState extends State<Checkout> {
                     builder:
                         (context, AsyncSnapshot<List<CouponModel>> snapshot) {
                       if (snapshot.connectionState != ConnectionState.done) {
-                        return Center(
+                        return const Center(
                           child: CircularProgressIndicator(),
                         );
                       }
-                      if (!snapshot.hasData) return SizedBox();
+                      if (!snapshot.hasData) return const SizedBox();
 
                       return SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
@@ -156,7 +158,7 @@ class _CheckoutState extends State<Checkout> {
       bottomSheet: Container(
         height: 150,
         width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -164,7 +166,7 @@ class _CheckoutState extends State<Checkout> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Text("You choose voucher: ${coupon!.code}",
-                    style: TextStyle(color: mainColor, fontSize: 12)),
+                    style: const TextStyle(color: mainColor, fontSize: 12)),
               ),
             Row(
               children: [
@@ -173,14 +175,14 @@ class _CheckoutState extends State<Checkout> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      const Text(
                         "Total",
                         style: TextStyle(color: inActiveColor, fontSize: 14),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Text(
                         "\$ ${loadTotalPrice()}",
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: mainColor,
                             fontSize: 14,
                             fontWeight: FontWeight.bold),
@@ -194,13 +196,13 @@ class _CheckoutState extends State<Checkout> {
                       onTap: () async {
                         await BeatRepository.soldBeat(
                             UserRepository.currentUser!.id, widget.beatsToBuy);
-                        AppBloc.cartBloc.add(LoadData());
+                        AppBloc.cartBloc.add(const LoadData());
                         AppBloc.beatBloc
-                            .add(ChangeStatus(UploadStatus.complete));
+                            .add(const ChangeStatus(UploadStatus.complete));
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Complete()));
+                                builder: (context) => const Complete()));
                       },
                       child: Container(
                         height: 40,
@@ -208,7 +210,7 @@ class _CheckoutState extends State<Checkout> {
                         decoration: BoxDecoration(
                             color: primary,
                             borderRadius: BorderRadius.circular(10)),
-                        child: Text("Order",
+                        child: const Text("Order",
                             style: TextStyle(color: textBoxColor)),
                       ),
                     ),
@@ -240,12 +242,12 @@ class _AppBarWidget extends StatelessWidget {
         onPressed: () {
           Navigator.pop(context);
         },
-        icon: Icon(
+        icon: const Icon(
           Icons.arrow_back,
           color: darker,
         ),
       ),
-      title: Text(
+      title: const Text(
         "Checkout",
         style: TextStyle(
           color: darker,

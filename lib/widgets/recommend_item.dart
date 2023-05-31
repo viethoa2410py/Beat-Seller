@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_booking/models/model.dart';
-import 'package:hotel_booking/theme/color.dart';
+import 'package:beatSeller/models/model.dart';
+import 'package:beatSeller/theme/color.dart';
 import 'custom_image.dart';
 
 class RecommendItem extends StatelessWidget {
-  RecommendItem({Key? key, required this.data, this.onTap}) : super(key: key);
+  const RecommendItem({Key? key, required this.data, this.onTap})
+      : super(key: key);
   final BeatModel data;
   final GestureTapCallback? onTap;
 
@@ -13,7 +14,7 @@ class RecommendItem extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           width: 300,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
@@ -23,7 +24,7 @@ class RecommendItem extends StatelessWidget {
                 color: Colors.grey.withOpacity(0.1),
                 spreadRadius: 1,
                 blurRadius: 1,
-                offset: Offset(1, 1), // changes position of shadow
+                offset: const Offset(1, 1), // changes position of shadow
               ),
             ],
           ),
@@ -34,7 +35,7 @@ class RecommendItem extends StatelessWidget {
                 radius: 15,
                 height: 80,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               Expanded(
@@ -50,14 +51,14 @@ class RecommendItem extends StatelessWidget {
                           fontSize: 16,
                           fontWeight: FontWeight.w600),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
                     Text(
                       data.type.name,
                       style: TextStyle(fontSize: 12, color: textColor),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     Row(
@@ -67,7 +68,7 @@ class RecommendItem extends StatelessWidget {
                           size: 14,
                           color: yellow,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 3,
                         ),
                         Row(

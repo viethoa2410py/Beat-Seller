@@ -1,4 +1,4 @@
-import 'package:hotel_booking/models/model_user.dart';
+import 'package:beatSeller/models/model_user.dart';
 
 class BeatModel {
   late String key;

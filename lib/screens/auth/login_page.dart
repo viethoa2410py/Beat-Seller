@@ -1,20 +1,18 @@
-import 'package:hotel_booking/blocs/app_bloc.dart';
-import 'package:hotel_booking/blocs/bloc.dart';
-import 'package:hotel_booking/global/constant/color.dart';
-import 'package:hotel_booking/global/constant/icons.dart';
-import 'package:hotel_booking/repository/repository.dart';
-import 'package:hotel_booking/screens/auth/register_page.dart';
-import 'package:hotel_booking/screens/root_app.dart';
-import 'package:hotel_booking/utils/snack_bar.dart';
+import 'package:beatSeller/blocs/app_bloc.dart';
+import 'package:beatSeller/blocs/bloc.dart';
+import 'package:beatSeller/global/constant/color.dart';
+import 'package:beatSeller/repository/repository.dart';
+import 'package:beatSeller/screens/auth/register_page.dart';
+import 'package:beatSeller/screens/root_app.dart';
+import 'package:beatSeller/utils/snack_bar.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hotel_booking/utils/extension.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:hotel_booking/widgets/alert_dialog/alert_dialog_builder.dart';
-import 'package:hotel_booking/widgets/app_bar.dart';
-import 'package:hotel_booking/widgets/app_button.dart';
-import 'package:hotel_booking/widgets/text_input_field.dart';
+import 'package:beatSeller/utils/extension.dart';
+import 'package:beatSeller/widgets/alert_dialog/alert_dialog_builder.dart';
+import 'package:beatSeller/widgets/app_bar.dart';
+import 'package:beatSeller/widgets/app_button.dart';
+import 'package:beatSeller/widgets/text_input_field.dart';
 
 class LoginPage extends StatefulWidget {
   static const id = 'LoginPage';
@@ -27,7 +25,7 @@ class LoginPage extends StatefulWidget {
 class LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final _formKey = new GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +40,7 @@ class LoginPageState extends State<LoginPage> {
             if (state.status == AuthStatus.logged) {
               ScaffoldMessenger.of(context).showSnackBar(
                   ExpandedSnackBar.successSnackBar(context,
-                      "Welcome back " + UserRepository.currentUser!.email));
+                      "Welcome back ${UserRepository.currentUser!.email}"));
               Navigator.pushReplacementNamed(context, RootApp.id);
             }
             if (state.status == AuthStatus.error) {
@@ -71,6 +69,7 @@ class LoginPageState extends State<LoginPage> {
           'Email'.desc().marg(0, 0, 20),
           AppTextInputField.authVisibleInputText(
             controller: _emailController,
+            inputType: TextInputType.emailAddress,
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return "Input your mail";
@@ -97,8 +96,8 @@ class LoginPageState extends State<LoginPage> {
                 ));
               }
             },
-            child: 'Confirm'.buttonTitle(),
             borderRadius: BorderRadius.circular(2),
+            child: 'Confirm'.buttonTitle(),
           ),
           // Column(
           //   crossAxisAlignment: CrossAxisAlignment.center,

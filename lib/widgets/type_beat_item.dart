@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_booking/theme/color.dart';
+import 'package:beatSeller/theme/color.dart';
 
 class TypeBeatItem extends StatelessWidget {
-  TypeBeatItem({Key? key, required this.data, this.isSelected = false, this.onTap})
+  const TypeBeatItem(
+      {Key? key, required this.data, this.isSelected = false, this.onTap})
       : super(key: key);
   final data;
   final bool isSelected;
@@ -15,7 +16,7 @@ class TypeBeatItem extends StatelessWidget {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 500),
         curve: Curves.fastOutSlowIn,
-        padding: EdgeInsets.all(12),
+        padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: isSelected ? primary : cardColor,
           borderRadius: BorderRadius.circular(10),
@@ -24,7 +25,7 @@ class TypeBeatItem extends StatelessWidget {
               color: shadowColor.withOpacity(0.05),
               spreadRadius: .5,
               blurRadius: .5,
-              offset: Offset(1, 1), // changes position of shadow
+              offset: const Offset(1, 1), // changes position of shadow
             ),
           ],
         ),

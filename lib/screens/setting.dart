@@ -1,17 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hotel_booking/blocs/app_bloc.dart';
-import 'package:hotel_booking/blocs/bloc.dart';
-import 'package:hotel_booking/repository/repository.dart';
+import 'package:beatSeller/blocs/app_bloc.dart';
+import 'package:beatSeller/blocs/bloc.dart';
+import 'package:beatSeller/repository/repository.dart';
 
-import 'package:hotel_booking/screens/auth/login_page.dart';
-import 'package:hotel_booking/theme/color.dart';
+import 'package:beatSeller/screens/auth/login_page.dart';
+import 'package:beatSeller/theme/color.dart';
 
-import 'package:hotel_booking/widgets/custom_image.dart';
-import 'package:hotel_booking/widgets/icon_box.dart';
-import 'package:hotel_booking/widgets/setting_item.dart';
+import 'package:beatSeller/widgets/custom_image.dart';
+import 'package:beatSeller/widgets/icon_box.dart';
+import 'package:beatSeller/widgets/setting_item.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -32,6 +31,7 @@ class _SettingPageState extends State<SettingPage> {
               pinned: true,
               snap: true,
               floating: true,
+              leading: Container(),
               title: getAppBar(),
             ),
             SliverList(
@@ -49,7 +49,7 @@ class _SettingPageState extends State<SettingPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Expanded(
+          const Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -64,12 +64,12 @@ class _SettingPageState extends State<SettingPage> {
             ),
           ),
           IconBox(
+            bgColor: appBgColor,
             child: SvgPicture.asset(
               "assets/icons/edit.svg",
               width: 18,
               height: 18,
             ),
-            bgColor: appBgColor,
           ),
         ],
       ),
@@ -78,11 +78,11 @@ class _SettingPageState extends State<SettingPage> {
 
   Widget buildBody() {
     return SingleChildScrollView(
-      padding: EdgeInsets.only(right: 20, top: 10),
+      padding: const EdgeInsets.only(right: 20, top: 10),
       child: Column(
         children: [
           Container(
-            padding: EdgeInsets.only(left: 20),
+            padding: const EdgeInsets.only(left: 20),
             child: Column(
               children: <Widget>[
                 CustomImage(
@@ -92,27 +92,27 @@ class _SettingPageState extends State<SettingPage> {
                   radius: 50,
                   isNetwork: false,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 12,
                 ),
                 Text(
                   UserRepository.currentUser != null
                       ? UserRepository.currentUser!.displayName
                       : "Display Name",
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: textColor,
                     fontSize: 20,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 Text(
                   UserRepository.currentUser != null
                       ? UserRepository.currentUser!.email
                       : "",
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: labelColor,
                     fontSize: 14,
                   ),
@@ -120,31 +120,31 @@ class _SettingPageState extends State<SettingPage> {
               ],
             ),
           ),
-          SizedBox(height: 40),
+          const SizedBox(height: 40),
           SettingItem(
               title: "General Setting",
               leadingIcon: Icons.settings,
               leadingIconColor: orange,
               onTap: () {}),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           SettingItem(
               title: "Bookings",
               leadingIcon: Icons.bookmark_border,
               leadingIconColor: blue,
               onTap: () {}),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           SettingItem(
               title: "Favorites",
               leadingIcon: Icons.favorite,
               leadingIconColor: red,
               onTap: () {}),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           SettingItem(
               title: "Privacy",
               leadingIcon: Icons.privacy_tip_outlined,
               leadingIconColor: green,
               onTap: () {}),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           SettingItem(
             title: "Log Out",
             leadingIcon: Icons.logout_outlined,
@@ -153,7 +153,7 @@ class _SettingPageState extends State<SettingPage> {
               showConfirmLogout();
             },
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
         ],
       ),
     );
@@ -163,7 +163,7 @@ class _SettingPageState extends State<SettingPage> {
     showCupertinoModalPopup(
       context: context,
       builder: (context) => CupertinoActionSheet(
-        message: Text("Would you like to log out?"),
+        message: const Text("Would you like to log out?"),
         actions: [
           CupertinoActionSheetAction(
             onPressed: () {
@@ -173,14 +173,14 @@ class _SettingPageState extends State<SettingPage> {
                 MaterialPageRoute(builder: (context) => const LoginPage()),
               );
             },
-            child: Text(
+            child: const Text(
               "Log Out",
               style: TextStyle(color: actionColor),
             ),
           )
         ],
         cancelButton: CupertinoActionSheetAction(
-          child: Text("Cancel"),
+          child: const Text("Cancel"),
           onPressed: () {
             Navigator.of(context).pop();
           },

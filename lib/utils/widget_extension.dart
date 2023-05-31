@@ -1,4 +1,4 @@
-import 'package:hotel_booking/global/constant/color.dart';
+import 'package:beatSeller/global/constant/color.dart';
 import 'package:flutter/material.dart';
 
 extension WidgetExtension on Widget {
@@ -18,7 +18,7 @@ extension WidgetExtension on Widget {
   }
 
   Widget rectangle(double width, double height) {
-    return SizedBox(child: this, width: width, height: height);
+    return SizedBox(width: width, height: height, child: this);
   }
 
   Widget height(double size) {
@@ -41,12 +41,12 @@ extension WidgetExtension on Widget {
     return ClipRRect(
       borderRadius: BorderRadius.all(Radius.circular(radius)),
       child: Container(
-        child: this,
         decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.all(Radius.circular(radius)),
             border: Border.all(
                 color: borderColor ?? Colors.white, width: borderWidth ?? 0)),
+        child: this,
       ),
     );
   }

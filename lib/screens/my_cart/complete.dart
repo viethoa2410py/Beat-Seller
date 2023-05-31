@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_booking/screens/root_app.dart';
-import 'package:hotel_booking/theme/color.dart';
+import 'package:beatSeller/screens/root_app.dart';
+import 'package:beatSeller/theme/color.dart';
 
 class Complete extends StatelessWidget {
   const Complete({Key? key}) : super(key: key);
@@ -9,7 +9,7 @@ class Complete extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: appBgColor,
-      body: Center(
+      body: const Center(
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
           child: Text(
@@ -27,12 +27,12 @@ class Complete extends StatelessWidget {
         child: Container(
             height: 40,
             alignment: Alignment.center,
-            margin: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+            margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
             decoration: BoxDecoration(
               color: primary,
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Text(
+            child: const Text(
               "Back to home",
               style: TextStyle(
                   color: textBoxColor,

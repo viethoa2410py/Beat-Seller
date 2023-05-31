@@ -1,10 +1,10 @@
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
-import 'package:hotel_booking/global/constant/color.dart';
-import 'package:hotel_booking/global/constant/error.dart';
-import 'package:hotel_booking/global/constant/icons.dart';
+import 'package:beatSeller/global/constant/color.dart';
+import 'package:beatSeller/global/constant/error.dart';
+import 'package:beatSeller/global/constant/icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hotel_booking/utils/extension.dart';
+import 'package:beatSeller/utils/extension.dart';
 import 'alert_dialog_widget.dart';
 
 Future showDialogWidget(

@@ -1,7 +1,7 @@
 import 'dart:io';
-import 'package:hotel_booking/api/api.dart';
-import 'package:hotel_booking/models/model.dart';
-import 'package:hotel_booking/models/model_coupon.dart';
+import 'package:beatSeller/api/api.dart';
+import 'package:beatSeller/models/model.dart';
+import 'package:beatSeller/models/model_coupon.dart';
 
 class BeatRepository {
   static final BeatRepository _instance = BeatRepository._internal();
@@ -33,7 +33,6 @@ class BeatRepository {
   static Future<List<BeatModel>> getRecommendedBeats() async {
     try {
       final list = <BeatModel>[];
-      final listRecommended = <BeatModel>[];
       var data = await Api.getDataRecommendedBeats();
       if (data != null) {
         data.forEach(
@@ -76,11 +75,11 @@ class BeatRepository {
       if (data != null) {
         data.forEach(
             ((key, value) => list.add(BeatModel.fromJson(value, key))));
-        list.forEach((element) {
+        for (var element in list) {
           if (element.creator.id == userId) {
             listMyBeats.add(element);
           }
-        });
+        }
         listMyBeats.removeWhere((element) => element.isSold);
         listMyBeats.sort((a, b) => b.createDate.compareTo(a.createDate));
       }
@@ -120,10 +119,10 @@ class BeatRepository {
 
   static Future uploadBeat(BeatModel beat) async {
     try {
-      var _beat = beat;
-      _beat.thumbnail.audio = await uploadFile(beat.thumbnail.audio);
-      _beat.thumbnail.image = await uploadFile(beat.thumbnail.image);
-      await Api.uploadBeat(_beat);
+      var beat0 = beat;
+      beat0.thumbnail.audio = await uploadFile(beat.thumbnail.audio);
+      beat0.thumbnail.image = await uploadFile(beat.thumbnail.image);
+      await Api.uploadBeat(beat0);
     } catch (e) {
       print("[ERROR]: $e");
     }

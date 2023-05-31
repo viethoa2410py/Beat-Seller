@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:hotel_booking/api/api.dart';
-import 'package:hotel_booking/models/model_user.dart';
+import 'package:beatSeller/api/api.dart';
+import 'package:beatSeller/models/model_user.dart';
 
 class UserRepository {
   static UserModel? currentUser;
@@ -32,7 +32,10 @@ class UserRepository {
 
     if (user.user != null) {
       var _user = UserModel(
-          id: user.user!.uid, email: user.user!.email!, displayName: displayName,role: "Customer");
+          id: user.user!.uid,
+          email: user.user!.email!,
+          displayName: displayName,
+          role: "Customer");
       await Api.createUser(_user);
       currentUser = _user;
       return _user;

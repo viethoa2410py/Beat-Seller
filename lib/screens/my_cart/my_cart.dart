@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hotel_booking/blocs/app_bloc.dart';
-import 'package:hotel_booking/blocs/bloc.dart';
-import 'package:hotel_booking/models/model.dart';
-import 'package:hotel_booking/models/model_coupon.dart';
-import 'package:hotel_booking/screens/beat_detail.dart';
-import 'package:hotel_booking/screens/my_cart/popup_coupon.dart';
-import 'package:hotel_booking/theme/color.dart';
-import 'package:hotel_booking/utils/snack_bar.dart';
-import 'package:hotel_booking/widgets/cart_item.dart';
+import 'package:beatSeller/blocs/app_bloc.dart';
+import 'package:beatSeller/blocs/bloc.dart';
+import 'package:beatSeller/models/model.dart';
+import 'package:beatSeller/models/model_coupon.dart';
+import 'package:beatSeller/screens/beat_detail.dart';
+import 'package:beatSeller/screens/my_cart/popup_coupon.dart';
+import 'package:beatSeller/theme/color.dart';
+import 'package:beatSeller/utils/snack_bar.dart';
+import 'package:beatSeller/widgets/cart_item.dart';
 
 import 'checkout.dart';
 
@@ -23,7 +23,7 @@ class MyCart extends StatefulWidget {
 class _MyCartState extends State<MyCart> {
   @override
   void initState() {
-    AppBloc.cartBloc.add(LoadData());
+    AppBloc.cartBloc.add(const LoadData());
     super.initState();
   }
 
@@ -58,13 +58,13 @@ class _MyCartState extends State<MyCart> {
           },
           builder: (context, beats) {
             if (beats.isEmpty) {
-              return SizedBox();
+              return const SizedBox();
             }
             return Container(
               height: 160,
               color: Colors.white,
-              padding:
-                  EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 30),
+              padding: const EdgeInsets.only(
+                  left: 20, right: 20, top: 10, bottom: 30),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -75,7 +75,8 @@ class _MyCartState extends State<MyCart> {
                           context: context,
                           barrierDismissible: true,
                           animationType: DialogTransitionType.scale,
-                          builder: (BuildContext context) => PopupCoupon());
+                          builder: (BuildContext context) =>
+                              const PopupCoupon());
                       setState(() {
                         coupon = result;
                       });
@@ -86,7 +87,7 @@ class _MyCartState extends State<MyCart> {
                       decoration: BoxDecoration(
                           color: inActiveColor,
                           borderRadius: BorderRadius.circular(10)),
-                      child: Text("ADD A COUPON",
+                      child: const Text("ADD A COUPON",
                           style: TextStyle(color: primary)),
                     ),
                   ),
@@ -94,7 +95,8 @@ class _MyCartState extends State<MyCart> {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       child: Text("You choose voucher: ${coupon!.code}",
-                          style: TextStyle(color: mainColor, fontSize: 12)),
+                          style:
+                              const TextStyle(color: mainColor, fontSize: 12)),
                     ),
                   Row(
                     children: [
@@ -105,11 +107,11 @@ class _MyCartState extends State<MyCart> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Total",
+                                const Text("Total",
                                     style: TextStyle(
                                         color: labelColor, fontSize: 12)),
                                 Text(loadTotalPrice().toString(),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: mainColor,
                                         fontSize: 12,
                                         fontWeight: FontWeight.w500)),
@@ -118,11 +120,11 @@ class _MyCartState extends State<MyCart> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Saving",
+                                const Text("Saving",
                                     style: TextStyle(
                                         color: labelColor, fontSize: 12)),
                                 Text(loadCouponPrice().toString(),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: mainColor,
                                         fontSize: 12,
                                         fontWeight: FontWeight.w500)),
@@ -135,13 +137,13 @@ class _MyCartState extends State<MyCart> {
                         child: Center(
                           child: InkWell(
                             onTap: () {
-                              if (listBeatBuy.isNotEmpty)
+                              if (listBeatBuy.isNotEmpty) {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
                                             Checkout(beatsToBuy: listBeatBuy)));
-                              else {
+                              } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     ExpandedSnackBar.failureSnackBar(context,
                                         "Please choose at least one beat to pay"));
@@ -153,7 +155,7 @@ class _MyCartState extends State<MyCart> {
                               decoration: BoxDecoration(
                                   color: primary,
                                   borderRadius: BorderRadius.circular(10)),
-                              child: Text("Buy Now",
+                              child: const Text("Buy Now",
                                   style: TextStyle(color: textBoxColor)),
                             ),
                           ),
@@ -168,7 +170,7 @@ class _MyCartState extends State<MyCart> {
         ),
         body: CustomScrollView(
           slivers: [
-            _AppBarWidget(),
+            const _AppBarWidget(),
             SliverToBoxAdapter(
                 child: SingleChildScrollView(
               child: Padding(
@@ -183,7 +185,7 @@ class _MyCartState extends State<MyCart> {
                       },
                       builder: (context, beats) {
                         if (beats.isEmpty) {
-                          return Center(
+                          return const Center(
                             child: Text(
                               "No had data",
                               style: TextStyle(color: mainColor, fontSize: 14),
@@ -221,7 +223,7 @@ class _MyCartState extends State<MyCart> {
                         );
                       },
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 150,
                     )
                   ],
@@ -252,12 +254,12 @@ class _AppBarWidget extends StatelessWidget {
         onPressed: () {
           Navigator.pop(context);
         },
-        icon: Icon(
+        icon: const Icon(
           Icons.arrow_back,
           color: darker,
         ),
       ),
-      title: Text(
+      title: const Text(
         "My Cart",
         style: TextStyle(
           color: darker,

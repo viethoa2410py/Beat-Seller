@@ -1,11 +1,9 @@
-import 'package:hotel_booking/global/constant/color.dart';
+import 'package:beatSeller/global/constant/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hotel_booking/utils/extension.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
+import 'package:beatSeller/utils/extension.dart';
 
-class BaseAppBar extends StatelessWidget with PreferredSizeWidget {
+class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
   const BaseAppBar({
     Key? key,
     this.brightness = SystemUiOverlayStyle.light,
@@ -93,11 +91,11 @@ class BaseAppBar extends StatelessWidget with PreferredSizeWidget {
             })
           : null,
       bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1),
           child: Container(
             color: Colors.black.withOpacity(0.08),
             height: 1.0,
-          ),
-          preferredSize: const Size.fromHeight(1)),
+          )),
     );
   }
 
@@ -119,11 +117,11 @@ class BaseAppBar extends StatelessWidget with PreferredSizeWidget {
             .inkTap(onTap: () => logout.call())
       ],
       bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1),
           child: Container(
             color: Colors.black.withOpacity(0.08),
             height: 1.0,
-          ),
-          preferredSize: const Size.fromHeight(1)),
+          )),
     );
   }
 

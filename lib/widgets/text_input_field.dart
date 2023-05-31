@@ -1,7 +1,5 @@
-import 'package:hotel_booking/global/constant/color.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:beatSeller/global/constant/color.dart';
 import 'package:flutter/material.dart';
-import 'package:hotel_booking/utils/extension.dart';
 // import 'package:famly/constants/colors.dart';
 // import 'package:famly/util/extension/extension.dart';
 
@@ -70,7 +68,7 @@ class AppTextInputField extends StatefulWidget {
       contentPadding: contentPadding,
       outlineInputBorder: outlineInputBorder,
       enable: enable,
-      height: height ,
+      height: height,
       inputType: inputType,
       validator: validator,
       initialInputValue: initialInputValue,
@@ -174,7 +172,8 @@ class _AppTextInputFieldState extends State<AppTextInputField> {
           border: widget.outlineInputBorder ??
               OutlineInputBorder(
                   borderRadius: kDefaultBorder,
-                  borderSide: BorderSide(color: AppColors.redError, width: 1)),
+                  borderSide:
+                      const BorderSide(color: AppColors.redError, width: 1)),
           isDense: true,
           hintText: widget.hintText,
           enabledBorder: widget.outlineInputBorder ??
@@ -188,8 +187,6 @@ class _AppTextInputFieldState extends State<AppTextInputField> {
                   const BorderSide(color: AppColors.redError, width: 1)),
           contentPadding: widget.contentPadding ??
               const EdgeInsets.symmetric(vertical: 10.5, horizontal: 14),
-         
-       
           suffixIcon: widget.isObscureTextInput
               ? InkWell(
                   onTap: () {
@@ -197,7 +194,7 @@ class _AppTextInputFieldState extends State<AppTextInputField> {
                       _isObscurePassword = !_isObscurePassword!;
                     });
                   },
-                  child: Container(
+                  child: SizedBox(
                     width: 30,
                     height: 30,
                     child: Icon(

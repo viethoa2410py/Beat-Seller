@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_booking/models/model.dart';
-import 'package:hotel_booking/theme/color.dart';
-import 'package:hotel_booking/widgets/custom_image.dart';
+import 'package:beatSeller/models/model.dart';
+import 'package:beatSeller/theme/color.dart';
+import 'package:beatSeller/widgets/custom_image.dart';
 
 class CartItem extends StatefulWidget {
   const CartItem(
@@ -19,7 +19,7 @@ class _CartItemState extends State<CartItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           color: Colors.white,
@@ -28,7 +28,7 @@ class _CartItemState extends State<CartItem> {
               color: Colors.grey.withOpacity(0.1),
               spreadRadius: 1,
               blurRadius: 1,
-              offset: Offset(1, 1),
+              offset: const Offset(1, 1),
             ),
           ],
         ),
@@ -56,7 +56,7 @@ class _CartItemState extends State<CartItem> {
                     height: 80,
                     width: 80,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Column(
@@ -71,14 +71,14 @@ class _CartItemState extends State<CartItem> {
                             fontSize: 16,
                             fontWeight: FontWeight.w600),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       Text(
                         widget.data.type.name,
                         style: TextStyle(fontSize: 12, color: textColor),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       Row(
@@ -88,7 +88,7 @@ class _CartItemState extends State<CartItem> {
                             size: 14,
                             color: yellow,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 3,
                           ),
                           Row(

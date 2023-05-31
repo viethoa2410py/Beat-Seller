@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:hotel_booking/global/constant/color.dart';
+import 'package:beatSeller/global/constant/color.dart';
 import 'package:flutter/material.dart';
 
 import 'configs/decoration_config.dart';

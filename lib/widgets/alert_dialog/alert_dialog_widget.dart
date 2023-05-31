@@ -1,11 +1,11 @@
 // ignore_for_file: use_key_in_widget_constructors, must_be_immutable
 
 // ignore: implementation_imports
-import 'package:hotel_booking/global/constant/color.dart';
+import 'package:beatSeller/global/constant/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:hotel_booking/utils/extension.dart';
+import 'package:beatSeller/utils/extension.dart';
 
 enum DialogType {
   error,
@@ -114,7 +114,7 @@ class DialogBar extends StatelessWidget {
                               child: const Icon(
                                 Icons.close,
                                 size: 16,
-                              color: AppColors.redLike,
+                                color: AppColors.redLike,
                               ).pad(4).rectAll(10,
                                   color:
                                       const Color.fromRGBO(253, 224, 224, 1.0)))

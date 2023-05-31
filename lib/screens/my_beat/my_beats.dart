@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hotel_booking/blocs/bloc.dart';
-import 'package:hotel_booking/models/model.dart';
-import 'package:hotel_booking/repository/repository.dart';
-import 'package:hotel_booking/screens/beat_detail.dart';
-import 'package:hotel_booking/screens/my_beat/create_beat.dart';
-import 'package:hotel_booking/screens/my_cart/my_cart.dart';
-import 'package:hotel_booking/theme/color.dart';
-import 'package:hotel_booking/widgets/my_beat_item.dart';
-import 'package:hotel_booking/widgets/notification_box.dart';
+import 'package:beatSeller/blocs/bloc.dart';
+import 'package:beatSeller/models/model.dart';
+import 'package:beatSeller/repository/repository.dart';
+import 'package:beatSeller/screens/beat_detail.dart';
+import 'package:beatSeller/screens/my_beat/create_beat.dart';
+import 'package:beatSeller/screens/my_cart/my_cart.dart';
+import 'package:beatSeller/theme/color.dart';
+import 'package:beatSeller/widgets/my_beat_item.dart';
+import 'package:beatSeller/widgets/notification_box.dart';
 
 class MyBeats extends StatefulWidget {
   const MyBeats({Key? key}) : super(key: key);
@@ -24,7 +24,7 @@ class _MyBeatsState extends State<MyBeats> {
         backgroundColor: appBgColor,
         body: CustomScrollView(
           slivers: [
-            _AppBarWidget(),
+            const _AppBarWidget(),
             SliverToBoxAdapter(
                 child: SingleChildScrollView(
               child: Padding(
@@ -32,8 +32,8 @@ class _MyBeatsState extends State<MyBeats> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _ButtonCreateBeat(),
-                    SizedBox(height: 20),
+                    const _ButtonCreateBeat(),
+                    const SizedBox(height: 20),
                     BlocListener<BeatBloc, BeatState>(
                       listener: (context, state) {
                         if (state.uploadStatus == UploadStatus.complete) {
@@ -46,9 +46,10 @@ class _MyBeatsState extends State<MyBeats> {
                           builder: (context,
                               AsyncSnapshot<List<BeatModel>> snapshot) {
                             if (snapshot.connectionState !=
-                                ConnectionState.done)
-                              return Center(child: CircularProgressIndicator());
-                            else {
+                                ConnectionState.done) {
+                              return const Center(
+                                  child: CircularProgressIndicator());
+                            } else {
                               if (snapshot.hasData &&
                                   snapshot.data!.isNotEmpty) {
                                 return Column(
@@ -74,7 +75,7 @@ class _MyBeatsState extends State<MyBeats> {
                                   ),
                                 );
                               } else {
-                                return Center(
+                                return const Center(
                                   child: Text(
                                     "No data available",
                                     style: TextStyle(
@@ -105,13 +106,13 @@ class _ButtonCreateBeat extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => CreateBeat()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const CreateBeat()));
       },
       child: Container(
         width: 120,
         height: 40,
-        margin: EdgeInsets.only(left: 20),
+        margin: const EdgeInsets.only(left: 20),
         decoration: BoxDecoration(
             color: primary,
             borderRadius: BorderRadius.circular(8),
@@ -120,9 +121,9 @@ class _ButtonCreateBeat extends StatelessWidget {
                   color: shadowColor.withOpacity(0.1),
                   blurRadius: 1,
                   spreadRadius: 1,
-                  offset: Offset(0, 1))
+                  offset: const Offset(0, 1))
             ]),
-        child: Row(
+        child: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
@@ -130,7 +131,7 @@ class _ButtonCreateBeat extends StatelessWidget {
               color: textBoxColor,
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 8.0),
+              padding: EdgeInsets.only(left: 8.0),
               child: Text("Upload\nBeat",
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -158,7 +159,8 @@ class _AppBarWidget extends StatelessWidget {
       snap: true,
       floating: true,
       centerTitle: true,
-      title: Text(
+      leading: Container(),
+      title: const Text(
         "My Beats",
         style: TextStyle(
           color: darker,
@@ -173,7 +175,7 @@ class _AppBarWidget extends StatelessWidget {
               notifiedNumber: 1,
               onTap: () async {
                 await Navigator.push(context,
-                    MaterialPageRoute(builder: ((context) => MyCart())));
+                    MaterialPageRoute(builder: ((context) => const MyCart())));
               },
             ),
           )

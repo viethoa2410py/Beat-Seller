@@ -1,10 +1,10 @@
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as b;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hotel_booking/theme/color.dart';
+import 'package:beatSeller/theme/color.dart';
 
 class NotificationBox extends StatelessWidget {
-  NotificationBox(
+  const NotificationBox(
       {Key? key, this.onTap, this.size = 5, this.notifiedNumber = 0})
       : super(key: key);
   final GestureTapCallback? onTap;
@@ -23,11 +23,13 @@ class NotificationBox extends StatelessWidget {
             border: Border.all(color: Colors.grey.withOpacity(.3)),
           ),
           child: notifiedNumber > 0
-              ? Badge(
-                  badgeColor: actionColor,
-                  padding: EdgeInsets.all(3),
-                  position: BadgePosition.topEnd(top: -7, end: 0),
-                  badgeContent: Text(
+              ? b.Badge(
+                  badgeStyle: const b.BadgeStyle(
+                    badgeColor: actionColor,
+                    padding: EdgeInsets.all(3),
+                  ),
+                  position: b.BadgePosition.topEnd(top: -7, end: 0),
+                  badgeContent: const Text(
                     '',
                     style: TextStyle(color: Colors.white),
                   ),

@@ -1,16 +1,16 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hotel_booking/blocs/bloc.dart';
-import 'package:hotel_booking/models/model.dart';
-import 'package:hotel_booking/repository/repository.dart';
-import 'package:hotel_booking/screens/my_cart/my_cart.dart';
-import 'package:hotel_booking/theme/color.dart';
-import 'package:hotel_booking/utils/data.dart';
-import 'package:hotel_booking/widgets/type_beat_item.dart';
-import 'package:hotel_booking/widgets/feature_item.dart';
-import 'package:hotel_booking/widgets/notification_box.dart';
-import 'package:hotel_booking/widgets/recommend_item.dart';
+import 'package:beatSeller/blocs/bloc.dart';
+import 'package:beatSeller/models/model.dart';
+import 'package:beatSeller/repository/repository.dart';
+import 'package:beatSeller/screens/my_cart/my_cart.dart';
+import 'package:beatSeller/theme/color.dart';
+import 'package:beatSeller/utils/data.dart';
+import 'package:beatSeller/widgets/type_beat_item.dart';
+import 'package:beatSeller/widgets/feature_item.dart';
+import 'package:beatSeller/widgets/notification_box.dart';
+import 'package:beatSeller/widgets/recommend_item.dart';
 
 import 'beat_detail.dart';
 
@@ -34,6 +34,7 @@ class _HomePageState extends State<HomePage> {
             pinned: true,
             snap: true,
             floating: true,
+            leading: Container(),
             title: getAppBar(),
           ),
           SliverToBoxAdapter(
@@ -49,7 +50,7 @@ class _HomePageState extends State<HomePage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(
+          const Column(
             children: [
               Row(
                 children: [
@@ -72,13 +73,13 @@ class _HomePageState extends State<HomePage> {
               )
             ],
           ),
-          Spacer(),
+          const Spacer(),
           if (UserRepository.currentUser!.role != "Admin")
             NotificationBox(
               notifiedNumber: 1,
               onTap: () async {
                 await Navigator.push(context,
-                    MaterialPageRoute(builder: ((context) => MyCart())));
+                    MaterialPageRoute(builder: ((context) => const MyCart())));
               },
             )
         ],
@@ -93,8 +94,8 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(15, 0, 15, 5),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(15, 0, 15, 5),
               child: Text(
                 "Find and Get",
                 style: TextStyle(
@@ -103,8 +104,8 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(15, 0, 15, 10),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
               child: Text(
                 "The Best Beats",
                 style: TextStyle(
@@ -114,8 +115,8 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            _TypeOfBeatWidget(),
-            SizedBox(
+            const _TypeOfBeatWidget(),
+            const SizedBox(
               height: 10,
             ),
             BlocListener<BeatBloc, BeatState>(
@@ -124,7 +125,7 @@ class _HomePageState extends State<HomePage> {
                   setState(() {});
                 }
               },
-              child: Column(
+              child: const Column(
                 children: [
                   _NewBeatWidget(),
                   SizedBox(
@@ -151,8 +152,8 @@ class _RecommendedBeatWidget extends StatelessWidget {
     return Column(
       children: [
         Container(
-          margin: EdgeInsets.fromLTRB(15, 0, 15, 10),
-          child: Row(
+          margin: const EdgeInsets.fromLTRB(15, 0, 15, 10),
+          child: const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
@@ -174,9 +175,9 @@ class _RecommendedBeatWidget extends StatelessWidget {
             child: FutureBuilder(
                 future: BeatRepository.getRecommendedBeats(),
                 builder: (context, AsyncSnapshot<List<BeatModel>> snapshot) {
-                  if (snapshot.connectionState != ConnectionState.done)
-                    return Center(child: CircularProgressIndicator());
-                  else {
+                  if (snapshot.connectionState != ConnectionState.done) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else {
                     if (snapshot.hasData && snapshot.data!.isNotEmpty) {
                       return Row(
                         children: List.generate(
@@ -199,7 +200,7 @@ class _RecommendedBeatWidget extends StatelessWidget {
                         ),
                       );
                     } else {
-                      return Center(
+                      return const Center(
                         child: Text(
                           "No data available",
                           style: TextStyle(
@@ -231,8 +232,8 @@ class _NewBeatWidgetState extends State<_NewBeatWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(15, 0, 15, 10),
+        const Padding(
+          padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
           child: Text(
             "New Beat",
             style: TextStyle(
@@ -245,9 +246,9 @@ class _NewBeatWidgetState extends State<_NewBeatWidget> {
         FutureBuilder(
             future: BeatRepository.getNewBeats(),
             builder: (context, AsyncSnapshot<List<BeatModel>> snapshot) {
-              if (snapshot.connectionState != ConnectionState.done)
-                return Center(child: CircularProgressIndicator());
-              else {
+              if (snapshot.connectionState != ConnectionState.done) {
+                return const Center(child: CircularProgressIndicator());
+              } else {
                 if (snapshot.hasData && snapshot.data!.isNotEmpty) {
                   return CarouselSlider(
                     options: CarouselOptions(
@@ -272,7 +273,7 @@ class _NewBeatWidgetState extends State<_NewBeatWidget> {
                     ),
                   );
                 } else {
-                  return Center(
+                  return const Center(
                     child: Text(
                       "No data available",
                       style: TextStyle(

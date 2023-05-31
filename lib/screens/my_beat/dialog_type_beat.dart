@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_booking/theme/color.dart';
-import 'package:hotel_booking/utils/data.dart';
-import 'package:hotel_booking/utils/widget_extension.dart';
-import 'package:hotel_booking/widgets/type_beat_item.dart';
+import 'package:beatSeller/theme/color.dart';
+import 'package:beatSeller/utils/data.dart';
+import 'package:beatSeller/utils/widget_extension.dart';
+import 'package:beatSeller/widgets/type_beat_item.dart';
 
 class DialogTypeBeat extends StatelessWidget {
   const DialogTypeBeat({Key? key}) : super(key: key);

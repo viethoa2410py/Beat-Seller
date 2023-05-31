@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hotel_booking/models/model.dart';
-import 'package:hotel_booking/repository/repository.dart';
+import 'package:beatSeller/models/model.dart';
+import 'package:beatSeller/repository/repository.dart';
 
 part 'cart_event.dart';
 part 'cart_state.dart';

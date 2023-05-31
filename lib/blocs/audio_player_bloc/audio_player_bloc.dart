@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hotel_booking/handler/audio_player_handler.dart';
-import 'package:hotel_booking/models/model.dart';
+import 'package:beatSeller/handler/audio_player_handler.dart';
+import 'package:beatSeller/models/model.dart';
 import 'package:just_audio/just_audio.dart';
 
 part 'audio_player_event.dart';
@@ -35,8 +35,8 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
     } catch (e) {}
   }
 
-  _listenAudioChanged(){
-  AudioPlayerHandler.player.playerStateStream.listen((playState) {
+  _listenAudioChanged() {
+    AudioPlayerHandler.player.playerStateStream.listen((playState) {
       final isPlaying = playState.playing;
 
       final processingState = playState.processingState;

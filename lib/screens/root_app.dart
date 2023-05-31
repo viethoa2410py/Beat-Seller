@@ -1,11 +1,12 @@
+import 'package:beatSeller/screens/chat/chatbot_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:hotel_booking/repository/user_repository.dart';
-import 'package:hotel_booking/screens/my_beat/my_beats.dart';
-import 'package:hotel_booking/screens/search_screen.dart';
-import 'package:hotel_booking/screens/setting.dart';
-import 'package:hotel_booking/theme/color.dart';
-import 'package:hotel_booking/utils/constant.dart';
-import 'package:hotel_booking/widgets/bottombar_item.dart';
+import 'package:beatSeller/repository/user_repository.dart';
+import 'package:beatSeller/screens/my_beat/my_beats.dart';
+import 'package:beatSeller/screens/search_screen.dart';
+import 'package:beatSeller/screens/setting.dart';
+import 'package:beatSeller/theme/color.dart';
+import 'package:beatSeller/utils/constant.dart';
+import 'package:beatSeller/widgets/bottombar_item.dart';
 
 import 'home.dart';
 
@@ -23,33 +24,33 @@ class _RootAppState extends State<RootApp> with TickerProviderStateMixin {
   List barItemsAdmin = [
     {
       "icon": "assets/icons/home.svg",
-      "page": HomePage(),
+      "page": const HomePage(),
     },
     {
       "icon": "assets/icons/search.svg",
-      "page": SearchScreen(),
+      "page": const SearchScreen(),
     },
     {
       "icon": "assets/icons/sound.svg",
-      "page": MyBeats(),
+      "page": const MyBeats(),
     },
     {
       "icon": "assets/icons/setting.svg",
-      "page": SettingPage(),
+      "page": const SettingPage(),
     },
   ];
   List barItemsUser = [
     {
       "icon": "assets/icons/home.svg",
-      "page": HomePage(),
+      "page": const HomePage(),
     },
     {
       "icon": "assets/icons/search.svg",
-      "page": SearchScreen(),
+      "page": const SearchScreen(),
     },
     {
       "icon": "assets/icons/setting.svg",
-      "page": SettingPage(),
+      "page": const SettingPage(),
     },
   ];
 
@@ -104,9 +105,10 @@ class _RootAppState extends State<RootApp> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: appBgColor,
-        bottomNavigationBar: getBottomBar(),
-        body: getBarPage());
+      backgroundColor: appBgColor,
+      bottomNavigationBar: getBottomBar(),
+      body: getBarPage(),
+    );
   }
 
   Widget getBarPage() {
@@ -122,14 +124,14 @@ class _RootAppState extends State<RootApp> with TickerProviderStateMixin {
       width: double.infinity,
       decoration: BoxDecoration(
           color: bottomBarColor,
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(25), topRight: Radius.circular(25)),
           boxShadow: [
             BoxShadow(
                 color: shadowColor.withOpacity(0.1),
                 blurRadius: 1,
                 spreadRadius: 1,
-                offset: Offset(0, 1))
+                offset: const Offset(0, 1))
           ]),
       child: Padding(
         padding: const EdgeInsets.only(

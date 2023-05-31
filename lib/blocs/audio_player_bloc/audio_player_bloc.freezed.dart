@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'audio_player_bloc.dart';
 
@@ -26,10 +26,10 @@ mixin _$AudioPlayerEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(BeatModel audio)? initial,
-    TResult Function()? play,
-    TResult Function()? pause,
-    TResult Function(AudioState state)? changeStateAudio,
+    TResult? Function(BeatModel audio)? initial,
+    TResult? Function()? play,
+    TResult? Function()? pause,
+    TResult? Function(AudioState state)? changeStateAudio,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -51,10 +51,10 @@ mixin _$AudioPlayerEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InitialAudio value)? initial,
-    TResult Function(PlayAudio value)? play,
-    TResult Function(PauseAudio value)? pause,
-    TResult Function(ChangeStateAudio value)? changeStateAudio,
+    TResult? Function(InitialAudio value)? initial,
+    TResult? Function(PlayAudio value)? play,
+    TResult? Function(PauseAudio value)? pause,
+    TResult? Function(ChangeStateAudio value)? changeStateAudio,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -72,17 +72,18 @@ mixin _$AudioPlayerEvent {
 abstract class $AudioPlayerEventCopyWith<$Res> {
   factory $AudioPlayerEventCopyWith(
           AudioPlayerEvent value, $Res Function(AudioPlayerEvent) then) =
-      _$AudioPlayerEventCopyWithImpl<$Res>;
+      _$AudioPlayerEventCopyWithImpl<$Res, AudioPlayerEvent>;
 }
 
 /// @nodoc
-class _$AudioPlayerEventCopyWithImpl<$Res>
+class _$AudioPlayerEventCopyWithImpl<$Res, $Val extends AudioPlayerEvent>
     implements $AudioPlayerEventCopyWith<$Res> {
   _$AudioPlayerEventCopyWithImpl(this._value, this._then);
 
-  final AudioPlayerEvent _value;
   // ignore: unused_field
-  final $Res Function(AudioPlayerEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -90,26 +91,25 @@ abstract class _$$InitialAudioCopyWith<$Res> {
   factory _$$InitialAudioCopyWith(
           _$InitialAudio value, $Res Function(_$InitialAudio) then) =
       __$$InitialAudioCopyWithImpl<$Res>;
+  @useResult
   $Res call({BeatModel audio});
 }
 
 /// @nodoc
 class __$$InitialAudioCopyWithImpl<$Res>
-    extends _$AudioPlayerEventCopyWithImpl<$Res>
+    extends _$AudioPlayerEventCopyWithImpl<$Res, _$InitialAudio>
     implements _$$InitialAudioCopyWith<$Res> {
   __$$InitialAudioCopyWithImpl(
       _$InitialAudio _value, $Res Function(_$InitialAudio) _then)
-      : super(_value, (v) => _then(v as _$InitialAudio));
+      : super(_value, _then);
 
-  @override
-  _$InitialAudio get _value => super._value as _$InitialAudio;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? audio = freezed,
+    Object? audio = null,
   }) {
     return _then(_$InitialAudio(
-      audio == freezed
+      null == audio
           ? _value.audio
           : audio // ignore: cast_nullable_to_non_nullable
               as BeatModel,
@@ -135,15 +135,15 @@ class _$InitialAudio implements InitialAudio {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$InitialAudio &&
-            const DeepCollectionEquality().equals(other.audio, audio));
+            (identical(other.audio, audio) || other.audio == audio));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(audio));
+  int get hashCode => Object.hash(runtimeType, audio);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$InitialAudioCopyWith<_$InitialAudio> get copyWith =>
       __$$InitialAudioCopyWithImpl<_$InitialAudio>(this, _$identity);
 
@@ -161,10 +161,10 @@ class _$InitialAudio implements InitialAudio {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(BeatModel audio)? initial,
-    TResult Function()? play,
-    TResult Function()? pause,
-    TResult Function(AudioState state)? changeStateAudio,
+    TResult? Function(BeatModel audio)? initial,
+    TResult? Function()? play,
+    TResult? Function()? pause,
+    TResult? Function(AudioState state)? changeStateAudio,
   }) {
     return initial?.call(audio);
   }
@@ -198,10 +198,10 @@ class _$InitialAudio implements InitialAudio {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InitialAudio value)? initial,
-    TResult Function(PlayAudio value)? play,
-    TResult Function(PauseAudio value)? pause,
-    TResult Function(ChangeStateAudio value)? changeStateAudio,
+    TResult? Function(InitialAudio value)? initial,
+    TResult? Function(PlayAudio value)? play,
+    TResult? Function(PauseAudio value)? pause,
+    TResult? Function(ChangeStateAudio value)? changeStateAudio,
   }) {
     return initial?.call(this);
   }
@@ -225,7 +225,7 @@ class _$InitialAudio implements InitialAudio {
 abstract class InitialAudio implements AudioPlayerEvent {
   const factory InitialAudio(final BeatModel audio) = _$InitialAudio;
 
-  BeatModel get audio => throw _privateConstructorUsedError;
+  BeatModel get audio;
   @JsonKey(ignore: true)
   _$$InitialAudioCopyWith<_$InitialAudio> get copyWith =>
       throw _privateConstructorUsedError;
@@ -240,14 +240,11 @@ abstract class _$$PlayAudioCopyWith<$Res> {
 
 /// @nodoc
 class __$$PlayAudioCopyWithImpl<$Res>
-    extends _$AudioPlayerEventCopyWithImpl<$Res>
+    extends _$AudioPlayerEventCopyWithImpl<$Res, _$PlayAudio>
     implements _$$PlayAudioCopyWith<$Res> {
   __$$PlayAudioCopyWithImpl(
       _$PlayAudio _value, $Res Function(_$PlayAudio) _then)
-      : super(_value, (v) => _then(v as _$PlayAudio));
-
-  @override
-  _$PlayAudio get _value => super._value as _$PlayAudio;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -283,10 +280,10 @@ class _$PlayAudio implements PlayAudio {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(BeatModel audio)? initial,
-    TResult Function()? play,
-    TResult Function()? pause,
-    TResult Function(AudioState state)? changeStateAudio,
+    TResult? Function(BeatModel audio)? initial,
+    TResult? Function()? play,
+    TResult? Function()? pause,
+    TResult? Function(AudioState state)? changeStateAudio,
   }) {
     return play?.call();
   }
@@ -320,10 +317,10 @@ class _$PlayAudio implements PlayAudio {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InitialAudio value)? initial,
-    TResult Function(PlayAudio value)? play,
-    TResult Function(PauseAudio value)? pause,
-    TResult Function(ChangeStateAudio value)? changeStateAudio,
+    TResult? Function(InitialAudio value)? initial,
+    TResult? Function(PlayAudio value)? play,
+    TResult? Function(PauseAudio value)? pause,
+    TResult? Function(ChangeStateAudio value)? changeStateAudio,
   }) {
     return play?.call(this);
   }
@@ -357,14 +354,11 @@ abstract class _$$PauseAudioCopyWith<$Res> {
 
 /// @nodoc
 class __$$PauseAudioCopyWithImpl<$Res>
-    extends _$AudioPlayerEventCopyWithImpl<$Res>
+    extends _$AudioPlayerEventCopyWithImpl<$Res, _$PauseAudio>
     implements _$$PauseAudioCopyWith<$Res> {
   __$$PauseAudioCopyWithImpl(
       _$PauseAudio _value, $Res Function(_$PauseAudio) _then)
-      : super(_value, (v) => _then(v as _$PauseAudio));
-
-  @override
-  _$PauseAudio get _value => super._value as _$PauseAudio;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -400,10 +394,10 @@ class _$PauseAudio implements PauseAudio {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(BeatModel audio)? initial,
-    TResult Function()? play,
-    TResult Function()? pause,
-    TResult Function(AudioState state)? changeStateAudio,
+    TResult? Function(BeatModel audio)? initial,
+    TResult? Function()? play,
+    TResult? Function()? pause,
+    TResult? Function(AudioState state)? changeStateAudio,
   }) {
     return pause?.call();
   }
@@ -437,10 +431,10 @@ class _$PauseAudio implements PauseAudio {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InitialAudio value)? initial,
-    TResult Function(PlayAudio value)? play,
-    TResult Function(PauseAudio value)? pause,
-    TResult Function(ChangeStateAudio value)? changeStateAudio,
+    TResult? Function(InitialAudio value)? initial,
+    TResult? Function(PlayAudio value)? play,
+    TResult? Function(PauseAudio value)? pause,
+    TResult? Function(ChangeStateAudio value)? changeStateAudio,
   }) {
     return pause?.call(this);
   }
@@ -470,26 +464,25 @@ abstract class _$$ChangeStateAudioCopyWith<$Res> {
   factory _$$ChangeStateAudioCopyWith(
           _$ChangeStateAudio value, $Res Function(_$ChangeStateAudio) then) =
       __$$ChangeStateAudioCopyWithImpl<$Res>;
+  @useResult
   $Res call({AudioState state});
 }
 
 /// @nodoc
 class __$$ChangeStateAudioCopyWithImpl<$Res>
-    extends _$AudioPlayerEventCopyWithImpl<$Res>
+    extends _$AudioPlayerEventCopyWithImpl<$Res, _$ChangeStateAudio>
     implements _$$ChangeStateAudioCopyWith<$Res> {
   __$$ChangeStateAudioCopyWithImpl(
       _$ChangeStateAudio _value, $Res Function(_$ChangeStateAudio) _then)
-      : super(_value, (v) => _then(v as _$ChangeStateAudio));
+      : super(_value, _then);
 
-  @override
-  _$ChangeStateAudio get _value => super._value as _$ChangeStateAudio;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? state = freezed,
+    Object? state = null,
   }) {
     return _then(_$ChangeStateAudio(
-      state == freezed
+      null == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
               as AudioState,
@@ -515,15 +508,15 @@ class _$ChangeStateAudio implements ChangeStateAudio {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ChangeStateAudio &&
-            const DeepCollectionEquality().equals(other.state, state));
+            (identical(other.state, state) || other.state == state));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(state));
+  int get hashCode => Object.hash(runtimeType, state);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$ChangeStateAudioCopyWith<_$ChangeStateAudio> get copyWith =>
       __$$ChangeStateAudioCopyWithImpl<_$ChangeStateAudio>(this, _$identity);
 
@@ -541,10 +534,10 @@ class _$ChangeStateAudio implements ChangeStateAudio {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(BeatModel audio)? initial,
-    TResult Function()? play,
-    TResult Function()? pause,
-    TResult Function(AudioState state)? changeStateAudio,
+    TResult? Function(BeatModel audio)? initial,
+    TResult? Function()? play,
+    TResult? Function()? pause,
+    TResult? Function(AudioState state)? changeStateAudio,
   }) {
     return changeStateAudio?.call(state);
   }
@@ -578,10 +571,10 @@ class _$ChangeStateAudio implements ChangeStateAudio {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InitialAudio value)? initial,
-    TResult Function(PlayAudio value)? play,
-    TResult Function(PauseAudio value)? pause,
-    TResult Function(ChangeStateAudio value)? changeStateAudio,
+    TResult? Function(InitialAudio value)? initial,
+    TResult? Function(PlayAudio value)? play,
+    TResult? Function(PauseAudio value)? pause,
+    TResult? Function(ChangeStateAudio value)? changeStateAudio,
   }) {
     return changeStateAudio?.call(this);
   }
@@ -605,7 +598,7 @@ class _$ChangeStateAudio implements ChangeStateAudio {
 abstract class ChangeStateAudio implements AudioPlayerEvent {
   const factory ChangeStateAudio(final AudioState state) = _$ChangeStateAudio;
 
-  AudioState get state => throw _privateConstructorUsedError;
+  AudioState get state;
   @JsonKey(ignore: true)
   _$$ChangeStateAudioCopyWith<_$ChangeStateAudio> get copyWith =>
       throw _privateConstructorUsedError;
@@ -625,34 +618,37 @@ mixin _$AudioPlayerState {
 abstract class $AudioPlayerStateCopyWith<$Res> {
   factory $AudioPlayerStateCopyWith(
           AudioPlayerState value, $Res Function(AudioPlayerState) then) =
-      _$AudioPlayerStateCopyWithImpl<$Res>;
+      _$AudioPlayerStateCopyWithImpl<$Res, AudioPlayerState>;
+  @useResult
   $Res call({AudioState audioState, BeatModel? currentSound});
 }
 
 /// @nodoc
-class _$AudioPlayerStateCopyWithImpl<$Res>
+class _$AudioPlayerStateCopyWithImpl<$Res, $Val extends AudioPlayerState>
     implements $AudioPlayerStateCopyWith<$Res> {
   _$AudioPlayerStateCopyWithImpl(this._value, this._then);
 
-  final AudioPlayerState _value;
   // ignore: unused_field
-  final $Res Function(AudioPlayerState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? audioState = freezed,
+    Object? audioState = null,
     Object? currentSound = freezed,
   }) {
     return _then(_value.copyWith(
-      audioState: audioState == freezed
+      audioState: null == audioState
           ? _value.audioState
           : audioState // ignore: cast_nullable_to_non_nullable
               as AudioState,
-      currentSound: currentSound == freezed
+      currentSound: freezed == currentSound
           ? _value.currentSound
           : currentSound // ignore: cast_nullable_to_non_nullable
               as BeatModel?,
-    ));
+    ) as $Val);
   }
 }
 
@@ -663,31 +659,30 @@ abstract class _$$_AudioPlayerStateCopyWith<$Res>
           _$_AudioPlayerState value, $Res Function(_$_AudioPlayerState) then) =
       __$$_AudioPlayerStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({AudioState audioState, BeatModel? currentSound});
 }
 
 /// @nodoc
 class __$$_AudioPlayerStateCopyWithImpl<$Res>
-    extends _$AudioPlayerStateCopyWithImpl<$Res>
+    extends _$AudioPlayerStateCopyWithImpl<$Res, _$_AudioPlayerState>
     implements _$$_AudioPlayerStateCopyWith<$Res> {
   __$$_AudioPlayerStateCopyWithImpl(
       _$_AudioPlayerState _value, $Res Function(_$_AudioPlayerState) _then)
-      : super(_value, (v) => _then(v as _$_AudioPlayerState));
+      : super(_value, _then);
 
-  @override
-  _$_AudioPlayerState get _value => super._value as _$_AudioPlayerState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? audioState = freezed,
+    Object? audioState = null,
     Object? currentSound = freezed,
   }) {
     return _then(_$_AudioPlayerState(
-      audioState: audioState == freezed
+      audioState: null == audioState
           ? _value.audioState
           : audioState // ignore: cast_nullable_to_non_nullable
               as AudioState,
-      currentSound: currentSound == freezed
+      currentSound: freezed == currentSound
           ? _value.currentSound
           : currentSound // ignore: cast_nullable_to_non_nullable
               as BeatModel?,
@@ -718,20 +713,18 @@ class _$_AudioPlayerState extends _AudioPlayerState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AudioPlayerState &&
-            const DeepCollectionEquality()
-                .equals(other.audioState, audioState) &&
-            const DeepCollectionEquality()
-                .equals(other.currentSound, currentSound));
+            (identical(other.audioState, audioState) ||
+                other.audioState == audioState) &&
+            (identical(other.currentSound, currentSound) ||
+                other.currentSound == currentSound));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(audioState),
-      const DeepCollectionEquality().hash(currentSound));
+  int get hashCode => Object.hash(runtimeType, audioState, currentSound);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_AudioPlayerStateCopyWith<_$_AudioPlayerState> get copyWith =>
       __$$_AudioPlayerStateCopyWithImpl<_$_AudioPlayerState>(this, _$identity);
 }
@@ -743,9 +736,9 @@ abstract class _AudioPlayerState extends AudioPlayerState {
   const _AudioPlayerState._() : super._();
 
   @override
-  AudioState get audioState => throw _privateConstructorUsedError;
+  AudioState get audioState;
   @override
-  BeatModel? get currentSound => throw _privateConstructorUsedError;
+  BeatModel? get currentSound;
   @override
   @JsonKey(ignore: true)
   _$$_AudioPlayerStateCopyWith<_$_AudioPlayerState> get copyWith =>

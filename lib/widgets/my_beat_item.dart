@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_booking/models/model.dart';
-import 'package:hotel_booking/theme/color.dart';
-import 'package:hotel_booking/widgets/custom_image.dart';
+import 'package:beatSeller/models/model.dart';
+import 'package:beatSeller/theme/color.dart';
+import 'package:beatSeller/widgets/custom_image.dart';
 
 class MyBeatItem extends StatelessWidget {
   const MyBeatItem({Key? key, required this.data, this.onTap})

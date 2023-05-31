@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_booking/theme/color.dart';
+import 'package:beatSeller/theme/color.dart';
 
 class SettingItem extends StatelessWidget {
   final IconData? leadingIcon;
@@ -21,7 +21,7 @@ class SettingItem extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.only(left: 15, right: 15),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               topRight: Radius.circular(15), bottomRight: Radius.circular(15)),
           color: cardColor,
           boxShadow: [
@@ -29,7 +29,7 @@ class SettingItem extends StatelessWidget {
               color: shadowColor.withOpacity(0.1),
               spreadRadius: 1,
               blurRadius: 1,
-              offset: Offset(0, 1), // changes position of shadow
+              offset: const Offset(0, 1), // changes position of shadow
             ),
           ],
         ),
@@ -40,7 +40,7 @@ class SettingItem extends StatelessWidget {
             children: leadingIcon != null
                 ? [
                     Container(
-                      padding: EdgeInsets.all(7),
+                      padding: const EdgeInsets.all(7),
                       decoration: BoxDecoration(
                         color: cardColor,
                         shape: BoxShape.circle,
@@ -49,7 +49,8 @@ class SettingItem extends StatelessWidget {
                             color: shadowColor.withOpacity(0.1),
                             spreadRadius: 1,
                             blurRadius: 1,
-                            offset: Offset(0, 1), // changes position of shadow
+                            offset: const Offset(
+                                0, 1), // changes position of shadow
                           ),
                         ],
                       ),
@@ -59,13 +60,13 @@ class SettingItem extends StatelessWidget {
                         color: leadingIconColor,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 20,
                     ),
                     Expanded(
                       child: Text(
                         title,
-                        style: TextStyle(fontSize: 16),
+                        style: const TextStyle(fontSize: 16),
                       ),
                     ),
                     Icon(
@@ -78,7 +79,7 @@ class SettingItem extends StatelessWidget {
                     Expanded(
                       child: Text(
                         title,
-                        style: TextStyle(fontSize: 16),
+                        style: const TextStyle(fontSize: 16),
                       ),
                     ),
                     Icon(

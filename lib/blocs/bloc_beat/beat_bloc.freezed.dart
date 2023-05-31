@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'beat_bloc.dart';
 
@@ -24,8 +24,8 @@ mixin _$BeatEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(BeatModel beat)? uploadBeat,
-    TResult Function(UploadStatus status)? changeStatus,
+    TResult? Function(BeatModel beat)? uploadBeat,
+    TResult? Function(UploadStatus status)? changeStatus,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -43,8 +43,8 @@ mixin _$BeatEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(UploadBeat value)? uploadBeat,
-    TResult Function(ChangeStatus value)? changeStatus,
+    TResult? Function(UploadBeat value)? uploadBeat,
+    TResult? Function(ChangeStatus value)? changeStatus,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -59,16 +59,18 @@ mixin _$BeatEvent {
 /// @nodoc
 abstract class $BeatEventCopyWith<$Res> {
   factory $BeatEventCopyWith(BeatEvent value, $Res Function(BeatEvent) then) =
-      _$BeatEventCopyWithImpl<$Res>;
+      _$BeatEventCopyWithImpl<$Res, BeatEvent>;
 }
 
 /// @nodoc
-class _$BeatEventCopyWithImpl<$Res> implements $BeatEventCopyWith<$Res> {
+class _$BeatEventCopyWithImpl<$Res, $Val extends BeatEvent>
+    implements $BeatEventCopyWith<$Res> {
   _$BeatEventCopyWithImpl(this._value, this._then);
 
-  final BeatEvent _value;
   // ignore: unused_field
-  final $Res Function(BeatEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -76,25 +78,25 @@ abstract class _$$UploadBeatCopyWith<$Res> {
   factory _$$UploadBeatCopyWith(
           _$UploadBeat value, $Res Function(_$UploadBeat) then) =
       __$$UploadBeatCopyWithImpl<$Res>;
+  @useResult
   $Res call({BeatModel beat});
 }
 
 /// @nodoc
-class __$$UploadBeatCopyWithImpl<$Res> extends _$BeatEventCopyWithImpl<$Res>
+class __$$UploadBeatCopyWithImpl<$Res>
+    extends _$BeatEventCopyWithImpl<$Res, _$UploadBeat>
     implements _$$UploadBeatCopyWith<$Res> {
   __$$UploadBeatCopyWithImpl(
       _$UploadBeat _value, $Res Function(_$UploadBeat) _then)
-      : super(_value, (v) => _then(v as _$UploadBeat));
+      : super(_value, _then);
 
-  @override
-  _$UploadBeat get _value => super._value as _$UploadBeat;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? beat = freezed,
+    Object? beat = null,
   }) {
     return _then(_$UploadBeat(
-      beat == freezed
+      null == beat
           ? _value.beat
           : beat // ignore: cast_nullable_to_non_nullable
               as BeatModel,
@@ -120,15 +122,15 @@ class _$UploadBeat implements UploadBeat {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UploadBeat &&
-            const DeepCollectionEquality().equals(other.beat, beat));
+            (identical(other.beat, beat) || other.beat == beat));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(beat));
+  int get hashCode => Object.hash(runtimeType, beat);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$UploadBeatCopyWith<_$UploadBeat> get copyWith =>
       __$$UploadBeatCopyWithImpl<_$UploadBeat>(this, _$identity);
 
@@ -144,8 +146,8 @@ class _$UploadBeat implements UploadBeat {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(BeatModel beat)? uploadBeat,
-    TResult Function(UploadStatus status)? changeStatus,
+    TResult? Function(BeatModel beat)? uploadBeat,
+    TResult? Function(UploadStatus status)? changeStatus,
   }) {
     return uploadBeat?.call(beat);
   }
@@ -175,8 +177,8 @@ class _$UploadBeat implements UploadBeat {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(UploadBeat value)? uploadBeat,
-    TResult Function(ChangeStatus value)? changeStatus,
+    TResult? Function(UploadBeat value)? uploadBeat,
+    TResult? Function(ChangeStatus value)? changeStatus,
   }) {
     return uploadBeat?.call(this);
   }
@@ -198,7 +200,7 @@ class _$UploadBeat implements UploadBeat {
 abstract class UploadBeat implements BeatEvent {
   const factory UploadBeat(final BeatModel beat) = _$UploadBeat;
 
-  BeatModel get beat => throw _privateConstructorUsedError;
+  BeatModel get beat;
   @JsonKey(ignore: true)
   _$$UploadBeatCopyWith<_$UploadBeat> get copyWith =>
       throw _privateConstructorUsedError;
@@ -209,25 +211,25 @@ abstract class _$$ChangeStatusCopyWith<$Res> {
   factory _$$ChangeStatusCopyWith(
           _$ChangeStatus value, $Res Function(_$ChangeStatus) then) =
       __$$ChangeStatusCopyWithImpl<$Res>;
+  @useResult
   $Res call({UploadStatus status});
 }
 
 /// @nodoc
-class __$$ChangeStatusCopyWithImpl<$Res> extends _$BeatEventCopyWithImpl<$Res>
+class __$$ChangeStatusCopyWithImpl<$Res>
+    extends _$BeatEventCopyWithImpl<$Res, _$ChangeStatus>
     implements _$$ChangeStatusCopyWith<$Res> {
   __$$ChangeStatusCopyWithImpl(
       _$ChangeStatus _value, $Res Function(_$ChangeStatus) _then)
-      : super(_value, (v) => _then(v as _$ChangeStatus));
+      : super(_value, _then);
 
-  @override
-  _$ChangeStatus get _value => super._value as _$ChangeStatus;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? status = freezed,
+    Object? status = null,
   }) {
     return _then(_$ChangeStatus(
-      status == freezed
+      null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as UploadStatus,
@@ -253,15 +255,15 @@ class _$ChangeStatus implements ChangeStatus {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ChangeStatus &&
-            const DeepCollectionEquality().equals(other.status, status));
+            (identical(other.status, status) || other.status == status));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(status));
+  int get hashCode => Object.hash(runtimeType, status);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$ChangeStatusCopyWith<_$ChangeStatus> get copyWith =>
       __$$ChangeStatusCopyWithImpl<_$ChangeStatus>(this, _$identity);
 
@@ -277,8 +279,8 @@ class _$ChangeStatus implements ChangeStatus {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(BeatModel beat)? uploadBeat,
-    TResult Function(UploadStatus status)? changeStatus,
+    TResult? Function(BeatModel beat)? uploadBeat,
+    TResult? Function(UploadStatus status)? changeStatus,
   }) {
     return changeStatus?.call(status);
   }
@@ -308,8 +310,8 @@ class _$ChangeStatus implements ChangeStatus {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(UploadBeat value)? uploadBeat,
-    TResult Function(ChangeStatus value)? changeStatus,
+    TResult? Function(UploadBeat value)? uploadBeat,
+    TResult? Function(ChangeStatus value)? changeStatus,
   }) {
     return changeStatus?.call(this);
   }
@@ -331,7 +333,7 @@ class _$ChangeStatus implements ChangeStatus {
 abstract class ChangeStatus implements BeatEvent {
   const factory ChangeStatus(final UploadStatus status) = _$ChangeStatus;
 
-  UploadStatus get status => throw _privateConstructorUsedError;
+  UploadStatus get status;
   @JsonKey(ignore: true)
   _$$ChangeStatusCopyWith<_$ChangeStatus> get copyWith =>
       throw _privateConstructorUsedError;
@@ -349,28 +351,32 @@ mixin _$BeatState {
 /// @nodoc
 abstract class $BeatStateCopyWith<$Res> {
   factory $BeatStateCopyWith(BeatState value, $Res Function(BeatState) then) =
-      _$BeatStateCopyWithImpl<$Res>;
+      _$BeatStateCopyWithImpl<$Res, BeatState>;
+  @useResult
   $Res call({UploadStatus uploadStatus});
 }
 
 /// @nodoc
-class _$BeatStateCopyWithImpl<$Res> implements $BeatStateCopyWith<$Res> {
+class _$BeatStateCopyWithImpl<$Res, $Val extends BeatState>
+    implements $BeatStateCopyWith<$Res> {
   _$BeatStateCopyWithImpl(this._value, this._then);
 
-  final BeatState _value;
   // ignore: unused_field
-  final $Res Function(BeatState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uploadStatus = freezed,
+    Object? uploadStatus = null,
   }) {
     return _then(_value.copyWith(
-      uploadStatus: uploadStatus == freezed
+      uploadStatus: null == uploadStatus
           ? _value.uploadStatus
           : uploadStatus // ignore: cast_nullable_to_non_nullable
               as UploadStatus,
-    ));
+    ) as $Val);
   }
 }
 
@@ -380,25 +386,25 @@ abstract class _$$_BeatStateCopyWith<$Res> implements $BeatStateCopyWith<$Res> {
           _$_BeatState value, $Res Function(_$_BeatState) then) =
       __$$_BeatStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({UploadStatus uploadStatus});
 }
 
 /// @nodoc
-class __$$_BeatStateCopyWithImpl<$Res> extends _$BeatStateCopyWithImpl<$Res>
+class __$$_BeatStateCopyWithImpl<$Res>
+    extends _$BeatStateCopyWithImpl<$Res, _$_BeatState>
     implements _$$_BeatStateCopyWith<$Res> {
   __$$_BeatStateCopyWithImpl(
       _$_BeatState _value, $Res Function(_$_BeatState) _then)
-      : super(_value, (v) => _then(v as _$_BeatState));
+      : super(_value, _then);
 
-  @override
-  _$_BeatState get _value => super._value as _$_BeatState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uploadStatus = freezed,
+    Object? uploadStatus = null,
   }) {
     return _then(_$_BeatState(
-      uploadStatus: uploadStatus == freezed
+      uploadStatus: null == uploadStatus
           ? _value.uploadStatus
           : uploadStatus // ignore: cast_nullable_to_non_nullable
               as UploadStatus,
@@ -425,16 +431,16 @@ class _$_BeatState implements _BeatState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BeatState &&
-            const DeepCollectionEquality()
-                .equals(other.uploadStatus, uploadStatus));
+            (identical(other.uploadStatus, uploadStatus) ||
+                other.uploadStatus == uploadStatus));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(uploadStatus));
+  int get hashCode => Object.hash(runtimeType, uploadStatus);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_BeatStateCopyWith<_$_BeatState> get copyWith =>
       __$$_BeatStateCopyWithImpl<_$_BeatState>(this, _$identity);
 }
@@ -443,7 +449,7 @@ abstract class _BeatState implements BeatState {
   const factory _BeatState({final UploadStatus uploadStatus}) = _$_BeatState;
 
   @override
-  UploadStatus get uploadStatus => throw _privateConstructorUsedError;
+  UploadStatus get uploadStatus;
   @override
   @JsonKey(ignore: true)
   _$$_BeatStateCopyWith<_$_BeatState> get copyWith =>
