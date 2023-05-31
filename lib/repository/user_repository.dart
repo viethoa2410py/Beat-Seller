@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:beatSeller/api/api.dart';
 import 'package:beatSeller/models/model_user.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserRepository {
   static UserModel? currentUser;
@@ -12,8 +13,18 @@ class UserRepository {
   }
 
   UserRepository._internal();
+  static Future<void> init() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    var userId = prefs.getString('userId');
+    if (userId != null && userId.isNotEmpty) {
+      var result = await getUser(userId);
+
+      currentUser = result;
+    }
+  }
 
   static Future<UserModel?> login(email, password) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
     UserCredential user = await FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: password);
 
@@ -21,24 +32,29 @@ class UserRepository {
       var result = await getUser(user.user!.uid);
 
       currentUser = result;
+      prefs.setBool('isLogin', true);
+      prefs.setString('userId', currentUser!.id);
       return result;
     }
     return null;
   }
 
   static Future<UserModel?> register(email, password, displayName) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
     UserCredential user = await FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: password);
 
     if (user.user != null) {
-      var _user = UserModel(
+      var user0 = UserModel(
           id: user.user!.uid,
           email: user.user!.email!,
           displayName: displayName,
           role: "Customer");
-      await Api.createUser(_user);
-      currentUser = _user;
-      return _user;
+      await Api.createUser(user0);
+      currentUser = user0;
+      prefs.setBool('isLogin', true);
+      prefs.setString('userId', currentUser!.id);
+      return user0;
     }
     return null;
   }

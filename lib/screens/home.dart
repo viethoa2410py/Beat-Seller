@@ -74,7 +74,7 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
           const Spacer(),
-          if (UserRepository.currentUser!.role != "Admin")
+          if (UserRepository.currentUser?.role != "Admin")
             NotificationBox(
               notifiedNumber: 1,
               onTap: () async {
