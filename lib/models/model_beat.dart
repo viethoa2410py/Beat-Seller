@@ -27,18 +27,18 @@ class BeatModel {
       required this.description,
       required this.isSold});
   BeatModel.initial(UserModel user) {
-    this.key = '-1';
-    this.id = '-1';
-    this.type = TypeBeat(icon: '', name: '');
-    this.producer = Producer(email: '', name: '');
-    this.creator = user;
-    this.createDate = "";
-    this.name = "";
-    this.price = 0;
-    this.discount = 0;
-    this.thumbnail = Thumbnail(image: '', audio: '');
-    this.description = "";
-    this.isSold = false;
+    key = '-1';
+    id = '-1';
+    type = TypeBeat(icon: '', name: '');
+    producer = Producer(email: '', name: '');
+    creator = user;
+    createDate = "";
+    name = "";
+    price = 0;
+    discount = 0;
+    thumbnail = Thumbnail(image: '', audio: '');
+    description = "";
+    isSold = false;
   }
   BeatModel.fromJson(json, key) {
     this.key = key;
@@ -56,18 +56,18 @@ class BeatModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['id'] = this.id.toString();
-    data['type'] = this.type.toJson();
-    data['producer'] = this.producer.toJson();
-    data['createDate'] = this.createDate;
-    data['name'] = this.name;
-    data['price'] = this.price;
-    data['discount'] = this.discount;
-    data['thumbnail'] = this.thumbnail.toJson();
-    data['description'] = this.description;
-    data['creator'] = this.creator.toJson();
-    data['isSold'] = this.isSold;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id.toString();
+    data['type'] = type.toJson();
+    data['producer'] = producer.toJson();
+    data['createDate'] = createDate;
+    data['name'] = name;
+    data['price'] = price;
+    data['discount'] = discount;
+    data['thumbnail'] = thumbnail.toJson();
+    data['description'] = description;
+    data['creator'] = creator.toJson();
+    data['isSold'] = isSold;
     return data;
   }
 }
@@ -84,9 +84,9 @@ class Thumbnail {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['image'] = this.image;
-    data['audio'] = this.audio;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['image'] = image;
+    data['audio'] = audio;
     return data;
   }
 }
@@ -103,9 +103,9 @@ class TypeBeat {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['icon'] = this.icon;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['name'] = name;
+    data['icon'] = icon;
     return data;
   }
 }
@@ -122,9 +122,9 @@ class Producer {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['email'] = this.email;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['name'] = name;
+    data['email'] = email;
     return data;
   }
 }

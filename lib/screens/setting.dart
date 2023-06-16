@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -11,6 +13,7 @@ import 'package:beatSeller/theme/color.dart';
 import 'package:beatSeller/widgets/custom_image.dart';
 import 'package:beatSeller/widgets/icon_box.dart';
 import 'package:beatSeller/widgets/setting_item.dart';
+import 'package:image_picker/image_picker.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -20,6 +23,24 @@ class SettingPage extends StatefulWidget {
 }
 
 class _SettingPageState extends State<SettingPage> {
+  final ImagePicker _picker = ImagePicker();
+  XFile? pickedFile;
+  _loadImage(ImageSource source) async {
+    try {
+      final XFile? result = await _picker.pickImage(
+        source: source,
+      );
+      if (result != null) {
+        setState(() {
+          pickedFile = result;
+        });
+        UserRepository.updateInfo(File(pickedFile!.path));
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,6 +53,7 @@ class _SettingPageState extends State<SettingPage> {
               snap: true,
               floating: true,
               leading: Container(),
+              centerTitle: true,
               title: getAppBar(),
             ),
             SliverList(
@@ -46,32 +68,10 @@ class _SettingPageState extends State<SettingPage> {
 
   Widget getAppBar() {
     return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Setting",
-                  style: TextStyle(
-                      color: textColor,
-                      fontSize: 24,
-                      fontWeight: FontWeight.w600),
-                ),
-              ],
-            ),
-          ),
-          IconBox(
-            bgColor: appBgColor,
-            child: SvgPicture.asset(
-              "assets/icons/edit.svg",
-              width: 18,
-              height: 18,
-            ),
-          ),
-        ],
+      child: const Text(
+        "Setting",
+        style: TextStyle(
+            color: textColor, fontSize: 24, fontWeight: FontWeight.w600),
       ),
     );
   }
@@ -85,12 +85,46 @@ class _SettingPageState extends State<SettingPage> {
             padding: const EdgeInsets.only(left: 20),
             child: Column(
               children: <Widget>[
-                CustomImage(
-                  "assets/icons/login.png",
-                  width: 80,
-                  height: 80,
-                  radius: 50,
-                  isNetwork: false,
+                Stack(
+                  alignment: Alignment.bottomRight,
+                  children: [
+                    pickedFile != null
+                        ? ClipRRect(
+                            borderRadius: BorderRadius.circular(50),
+                            child: SizedBox(
+                                height: 80,
+                                width: 80,
+                                child: Image.file(
+                                  File(pickedFile!.path),
+                                  fit: BoxFit.cover,
+                                )),
+                          )
+                        : CustomImage(
+                            UserRepository.currentUser != null &&
+                                    UserRepository.currentUser!.avatar != null
+                                ? UserRepository.currentUser!.avatar!
+                                : "assets/icons/login.png",
+                            width: 80,
+                            height: 80,
+                            radius: 50,
+                            isNetwork: UserRepository.currentUser != null &&
+                                UserRepository.currentUser!.avatar != null,
+                          ),
+                    IconBox(
+                      onTap: () {
+                        _displayPickImageDialog(context, (source) async {
+                          await _loadImage(source);
+                          Navigator.pop(context);
+                        });
+                      },
+                      bgColor: appBgColor,
+                      child: SvgPicture.asset(
+                        "assets/icons/edit.svg",
+                        width: 18,
+                        height: 18,
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(
                   height: 12,
@@ -185,6 +219,36 @@ class _SettingPageState extends State<SettingPage> {
             Navigator.of(context).pop();
           },
         ),
+      ),
+    );
+  }
+
+  Future<void> _displayPickImageDialog(
+      BuildContext context, Function(ImageSource) onPick) async {
+    showCupertinoModalPopup(
+      context: context,
+      builder: (context) => CupertinoActionSheet(
+        message: const Text("Upload avatar"),
+        actions: [
+          CupertinoActionSheetAction(
+            onPressed: () {
+              onPick(ImageSource.camera);
+            },
+            child: const Text(
+              "Camera",
+              style: TextStyle(color: actionColor),
+            ),
+          ),
+          CupertinoActionSheetAction(
+            onPressed: () {
+              onPick(ImageSource.gallery);
+            },
+            child: const Text(
+              "Gallery",
+              style: TextStyle(color: actionColor),
+            ),
+          )
+        ],
       ),
     );
   }

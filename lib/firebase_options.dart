@@ -65,7 +65,8 @@ class DefaultFirebaseOptions {
     projectId: 'beat-seller',
     databaseURL: 'https://beat-seller-default-rtdb.firebaseio.com',
     storageBucket: 'beat-seller.appspot.com',
-    iosClientId: '768977853381-9e9m802j698o19gdt3fvnv31fp27vjd5.apps.googleusercontent.com',
-    iosBundleId: 'com.sangvaleap.beatSeller',
+    iosClientId:
+        '768977853381-9e9m802j698o19gdt3fvnv31fp27vjd5.apps.googleusercontent.com',
+    iosBundleId: 'com.viethoa.xstudio',
   );
 }

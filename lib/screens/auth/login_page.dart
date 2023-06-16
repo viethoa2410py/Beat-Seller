@@ -2,6 +2,7 @@ import 'package:beatSeller/blocs/app_bloc.dart';
 import 'package:beatSeller/blocs/bloc.dart';
 import 'package:beatSeller/global/constant/color.dart';
 import 'package:beatSeller/repository/repository.dart';
+import 'package:beatSeller/screens/auth/forgot_password.dart';
 import 'package:beatSeller/screens/auth/register_page.dart';
 import 'package:beatSeller/screens/root_app.dart';
 import 'package:beatSeller/utils/snack_bar.dart';
@@ -150,7 +151,11 @@ class LoginPageState extends State<LoginPage> {
               .color(AppColors.textSecondary)
               .b()
               .inkTap(onTap: () {
-                showUnderDevelopmentFunction(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ForgotPassword()),
+                );
               })
               .center()
               .marg(0, 0, 10)

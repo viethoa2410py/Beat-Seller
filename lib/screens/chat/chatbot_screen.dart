@@ -1,12 +1,17 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:beatSeller/repository/repository.dart';
+import 'package:beatSeller/screens/beat_detail.dart';
+import 'package:beatSeller/utils/data.dart';
 import 'package:beatSeller/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart';
 import 'package:googleapis_auth/auth_io.dart';
 import 'package:googleapis/dialogflow/v2.dart';
+
+import 'widgets/w_message.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({Key? key}) : super(key: key);
@@ -74,7 +79,7 @@ class _ChatScreenState extends State<ChatScreen>
       final request = GoogleCloudDialogflowV2DetectIntentRequest();
       request.queryInput = GoogleCloudDialogflowV2QueryInput();
       request.queryInput?.text = GoogleCloudDialogflowV2TextInput();
-      request.queryInput?.text?.text = text;
+      request.queryInput?.text?.text = text.toString().toLowerCase();
       request.queryInput?.text?.languageCode = 'vi-VN';
       final response = await dialogflow.projects.agent.sessions.detectIntent(
           request, 'projects/beat-seller/agent/sessions/my-session-123');
@@ -83,8 +88,29 @@ class _ChatScreenState extends State<ChatScreen>
       setState(() {
         _isWaitingBot = false;
       });
+      var showBtn = false;
+      String type = '';
+      for (var element in types) {
+        if (text
+            .toString()
+            .toLowerCase()
+            .contains(element["name"].toString().toLowerCase())) {
+          type = element["name"].toString();
+          showBtn = true;
+        }
+      }
       botMessage = ChatMessage(
         text: fulfillmentText,
+        showBtn: showBtn,
+        openRecommendation: () async {
+          var beat = await BeatRepository.getBeatByType(type);
+          if (beat != null) {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => BeatDetail(beat: beat)));
+          }
+        },
         type: false,
       );
       setState(() {
@@ -102,6 +128,15 @@ class _ChatScreenState extends State<ChatScreen>
         _messages.insert(0, errorMessage);
       });
     }
+  }
+
+  checkRecommend(String query) {
+    for (var element in types) {
+      if (query.contains(element["name"].toString().toLowerCase())) {
+        return true;
+      }
+    }
+    return false;
   }
 
   List<String> suggestion = [];
@@ -200,101 +235,6 @@ class _ChatScreenState extends State<ChatScreen>
             const SizedBox(height: 20)
           ]),
         ),
-      ),
-    );
-  }
-}
-
-// ignore: must_be_immutable
-class ChatMessage extends StatelessWidget {
-  ChatMessage({Key? key, required this.text, required this.type})
-      : super(key: key);
-
-  final String text;
-  final bool type;
-
-  DateTime date = DateTime.now();
-
-  List<Widget> otherMessage(context) {
-    return <Widget>[
-      Expanded(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Container(
-              margin: const EdgeInsets.only(top: 10),
-              padding: const EdgeInsets.all(10),
-              decoration: const BoxDecoration(
-                  color: Color(0xFFF4F3F3),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(15),
-                    topRight: Radius.circular(15),
-                    bottomRight: Radius.circular(15),
-                  )),
-              child: Text(
-                text,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 6),
-              child: RichText(
-                text: TextSpan(
-                  text: "${date.hour}:${date.minute}",
-                  style: const TextStyle(color: Colors.grey),
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
-    ];
-  }
-
-  List<Widget> myMessage(context) {
-    return <Widget>[
-      Expanded(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
-            Container(
-              margin: const EdgeInsets.only(top: 10),
-              padding: const EdgeInsets.all(10),
-              decoration: const BoxDecoration(
-                  color: Color(0xFF2198E7),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(15),
-                    topRight: Radius.circular(15),
-                    bottomLeft: Radius.circular(15),
-                  )),
-              child: Text(
-                text,
-                style: const TextStyle(color: Colors.white),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 6),
-              child: RichText(
-                text: TextSpan(
-                    text: "${date.hour}:${date.minute}",
-                    style: const TextStyle(color: Colors.grey),
-                    children: const [
-                      TextSpan(text: " ✓", style: TextStyle(color: Colors.grey))
-                    ]),
-              ),
-            )
-          ],
-        ),
-      ),
-    ];
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 27),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: type ? myMessage(context) : otherMessage(context),
       ),
     );
   }

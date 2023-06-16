@@ -73,7 +73,7 @@ class AppButton extends StatelessWidget {
     return AppButton._(
         elevation: 0.0,
         backgroundColor: backgroundColor ?? AppColors.primaryButton,
-        onTap: onTap,
+        onTap: disableButton == true ? null : onTap,
         textStyle: textStyle ?? const TextStyle(fontWeight: FontWeight.w700),
         height: height,
         borderRadius: borderRadius,

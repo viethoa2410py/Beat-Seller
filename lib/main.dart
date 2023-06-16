@@ -51,8 +51,8 @@ class _MyAppState extends State<MyApp> {
     return MultiBlocProvider(
       providers: AppBloc.provides,
       child: MaterialApp(
+        title: 'X Studio',
         debugShowCheckedModeBanner: false,
-        title: 'Hotel Booking',
         theme: ThemeData(
           primaryColor: primary,
         ),

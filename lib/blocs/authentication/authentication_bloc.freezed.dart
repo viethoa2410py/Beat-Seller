@@ -19,6 +19,9 @@ mixin _$AuthenticationEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String email, String password) login,
+    required TResult Function(String email) sendCode,
+    required TResult Function(String email, String code, String newPass)
+        updatePass,
     required TResult Function(String email, String password, String displayName)
         register,
     required TResult Function() logout,
@@ -27,6 +30,8 @@ mixin _$AuthenticationEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String email, String password)? login,
+    TResult? Function(String email)? sendCode,
+    TResult? Function(String email, String code, String newPass)? updatePass,
     TResult? Function(String email, String password, String displayName)?
         register,
     TResult? Function()? logout,
@@ -35,6 +40,8 @@ mixin _$AuthenticationEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String email, String password)? login,
+    TResult Function(String email)? sendCode,
+    TResult Function(String email, String code, String newPass)? updatePass,
     TResult Function(String email, String password, String displayName)?
         register,
     TResult Function()? logout,
@@ -44,6 +51,8 @@ mixin _$AuthenticationEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Login value) login,
+    required TResult Function(SendCode value) sendCode,
+    required TResult Function(UpdatePass value) updatePass,
     required TResult Function(Register value) register,
     required TResult Function(Logout value) logout,
   }) =>
@@ -51,6 +60,8 @@ mixin _$AuthenticationEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Login value)? login,
+    TResult? Function(SendCode value)? sendCode,
+    TResult? Function(UpdatePass value)? updatePass,
     TResult? Function(Register value)? register,
     TResult? Function(Logout value)? logout,
   }) =>
@@ -58,6 +69,8 @@ mixin _$AuthenticationEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Login value)? login,
+    TResult Function(SendCode value)? sendCode,
+    TResult Function(UpdatePass value)? updatePass,
     TResult Function(Register value)? register,
     TResult Function(Logout value)? logout,
     required TResult orElse(),
@@ -155,6 +168,9 @@ class _$Login implements Login {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String email, String password) login,
+    required TResult Function(String email) sendCode,
+    required TResult Function(String email, String code, String newPass)
+        updatePass,
     required TResult Function(String email, String password, String displayName)
         register,
     required TResult Function() logout,
@@ -166,6 +182,8 @@ class _$Login implements Login {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String email, String password)? login,
+    TResult? Function(String email)? sendCode,
+    TResult? Function(String email, String code, String newPass)? updatePass,
     TResult? Function(String email, String password, String displayName)?
         register,
     TResult? Function()? logout,
@@ -177,6 +195,8 @@ class _$Login implements Login {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String email, String password)? login,
+    TResult Function(String email)? sendCode,
+    TResult Function(String email, String code, String newPass)? updatePass,
     TResult Function(String email, String password, String displayName)?
         register,
     TResult Function()? logout,
@@ -192,6 +212,8 @@ class _$Login implements Login {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Login value) login,
+    required TResult Function(SendCode value) sendCode,
+    required TResult Function(UpdatePass value) updatePass,
     required TResult Function(Register value) register,
     required TResult Function(Logout value) logout,
   }) {
@@ -202,6 +224,8 @@ class _$Login implements Login {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Login value)? login,
+    TResult? Function(SendCode value)? sendCode,
+    TResult? Function(UpdatePass value)? updatePass,
     TResult? Function(Register value)? register,
     TResult? Function(Logout value)? logout,
   }) {
@@ -212,6 +236,8 @@ class _$Login implements Login {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Login value)? login,
+    TResult Function(SendCode value)? sendCode,
+    TResult Function(UpdatePass value)? updatePass,
     TResult Function(Register value)? register,
     TResult Function(Logout value)? logout,
     required TResult orElse(),
@@ -231,6 +257,337 @@ abstract class Login implements AuthenticationEvent {
   String get password;
   @JsonKey(ignore: true)
   _$$LoginCopyWith<_$Login> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SendCodeCopyWith<$Res> {
+  factory _$$SendCodeCopyWith(
+          _$SendCode value, $Res Function(_$SendCode) then) =
+      __$$SendCodeCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String email});
+}
+
+/// @nodoc
+class __$$SendCodeCopyWithImpl<$Res>
+    extends _$AuthenticationEventCopyWithImpl<$Res, _$SendCode>
+    implements _$$SendCodeCopyWith<$Res> {
+  __$$SendCodeCopyWithImpl(_$SendCode _value, $Res Function(_$SendCode) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? email = null,
+  }) {
+    return _then(_$SendCode(
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SendCode implements SendCode {
+  const _$SendCode({required this.email});
+
+  @override
+  final String email;
+
+  @override
+  String toString() {
+    return 'AuthenticationEvent.sendCode(email: $email)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SendCode &&
+            (identical(other.email, email) || other.email == email));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, email);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SendCodeCopyWith<_$SendCode> get copyWith =>
+      __$$SendCodeCopyWithImpl<_$SendCode>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String email, String password) login,
+    required TResult Function(String email) sendCode,
+    required TResult Function(String email, String code, String newPass)
+        updatePass,
+    required TResult Function(String email, String password, String displayName)
+        register,
+    required TResult Function() logout,
+  }) {
+    return sendCode(email);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String email, String password)? login,
+    TResult? Function(String email)? sendCode,
+    TResult? Function(String email, String code, String newPass)? updatePass,
+    TResult? Function(String email, String password, String displayName)?
+        register,
+    TResult? Function()? logout,
+  }) {
+    return sendCode?.call(email);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String email, String password)? login,
+    TResult Function(String email)? sendCode,
+    TResult Function(String email, String code, String newPass)? updatePass,
+    TResult Function(String email, String password, String displayName)?
+        register,
+    TResult Function()? logout,
+    required TResult orElse(),
+  }) {
+    if (sendCode != null) {
+      return sendCode(email);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Login value) login,
+    required TResult Function(SendCode value) sendCode,
+    required TResult Function(UpdatePass value) updatePass,
+    required TResult Function(Register value) register,
+    required TResult Function(Logout value) logout,
+  }) {
+    return sendCode(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Login value)? login,
+    TResult? Function(SendCode value)? sendCode,
+    TResult? Function(UpdatePass value)? updatePass,
+    TResult? Function(Register value)? register,
+    TResult? Function(Logout value)? logout,
+  }) {
+    return sendCode?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Login value)? login,
+    TResult Function(SendCode value)? sendCode,
+    TResult Function(UpdatePass value)? updatePass,
+    TResult Function(Register value)? register,
+    TResult Function(Logout value)? logout,
+    required TResult orElse(),
+  }) {
+    if (sendCode != null) {
+      return sendCode(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SendCode implements AuthenticationEvent {
+  const factory SendCode({required final String email}) = _$SendCode;
+
+  String get email;
+  @JsonKey(ignore: true)
+  _$$SendCodeCopyWith<_$SendCode> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UpdatePassCopyWith<$Res> {
+  factory _$$UpdatePassCopyWith(
+          _$UpdatePass value, $Res Function(_$UpdatePass) then) =
+      __$$UpdatePassCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String email, String code, String newPass});
+}
+
+/// @nodoc
+class __$$UpdatePassCopyWithImpl<$Res>
+    extends _$AuthenticationEventCopyWithImpl<$Res, _$UpdatePass>
+    implements _$$UpdatePassCopyWith<$Res> {
+  __$$UpdatePassCopyWithImpl(
+      _$UpdatePass _value, $Res Function(_$UpdatePass) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? email = null,
+    Object? code = null,
+    Object? newPass = null,
+  }) {
+    return _then(_$UpdatePass(
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      code: null == code
+          ? _value.code
+          : code // ignore: cast_nullable_to_non_nullable
+              as String,
+      newPass: null == newPass
+          ? _value.newPass
+          : newPass // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UpdatePass implements UpdatePass {
+  const _$UpdatePass(
+      {required this.email, required this.code, required this.newPass});
+
+  @override
+  final String email;
+  @override
+  final String code;
+  @override
+  final String newPass;
+
+  @override
+  String toString() {
+    return 'AuthenticationEvent.updatePass(email: $email, code: $code, newPass: $newPass)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UpdatePass &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.code, code) || other.code == code) &&
+            (identical(other.newPass, newPass) || other.newPass == newPass));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, email, code, newPass);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdatePassCopyWith<_$UpdatePass> get copyWith =>
+      __$$UpdatePassCopyWithImpl<_$UpdatePass>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String email, String password) login,
+    required TResult Function(String email) sendCode,
+    required TResult Function(String email, String code, String newPass)
+        updatePass,
+    required TResult Function(String email, String password, String displayName)
+        register,
+    required TResult Function() logout,
+  }) {
+    return updatePass(email, code, newPass);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String email, String password)? login,
+    TResult? Function(String email)? sendCode,
+    TResult? Function(String email, String code, String newPass)? updatePass,
+    TResult? Function(String email, String password, String displayName)?
+        register,
+    TResult? Function()? logout,
+  }) {
+    return updatePass?.call(email, code, newPass);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String email, String password)? login,
+    TResult Function(String email)? sendCode,
+    TResult Function(String email, String code, String newPass)? updatePass,
+    TResult Function(String email, String password, String displayName)?
+        register,
+    TResult Function()? logout,
+    required TResult orElse(),
+  }) {
+    if (updatePass != null) {
+      return updatePass(email, code, newPass);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Login value) login,
+    required TResult Function(SendCode value) sendCode,
+    required TResult Function(UpdatePass value) updatePass,
+    required TResult Function(Register value) register,
+    required TResult Function(Logout value) logout,
+  }) {
+    return updatePass(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Login value)? login,
+    TResult? Function(SendCode value)? sendCode,
+    TResult? Function(UpdatePass value)? updatePass,
+    TResult? Function(Register value)? register,
+    TResult? Function(Logout value)? logout,
+  }) {
+    return updatePass?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Login value)? login,
+    TResult Function(SendCode value)? sendCode,
+    TResult Function(UpdatePass value)? updatePass,
+    TResult Function(Register value)? register,
+    TResult Function(Logout value)? logout,
+    required TResult orElse(),
+  }) {
+    if (updatePass != null) {
+      return updatePass(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UpdatePass implements AuthenticationEvent {
+  const factory UpdatePass(
+      {required final String email,
+      required final String code,
+      required final String newPass}) = _$UpdatePass;
+
+  String get email;
+  String get code;
+  String get newPass;
+  @JsonKey(ignore: true)
+  _$$UpdatePassCopyWith<_$UpdatePass> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -316,6 +673,9 @@ class _$Register implements Register {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String email, String password) login,
+    required TResult Function(String email) sendCode,
+    required TResult Function(String email, String code, String newPass)
+        updatePass,
     required TResult Function(String email, String password, String displayName)
         register,
     required TResult Function() logout,
@@ -327,6 +687,8 @@ class _$Register implements Register {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String email, String password)? login,
+    TResult? Function(String email)? sendCode,
+    TResult? Function(String email, String code, String newPass)? updatePass,
     TResult? Function(String email, String password, String displayName)?
         register,
     TResult? Function()? logout,
@@ -338,6 +700,8 @@ class _$Register implements Register {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String email, String password)? login,
+    TResult Function(String email)? sendCode,
+    TResult Function(String email, String code, String newPass)? updatePass,
     TResult Function(String email, String password, String displayName)?
         register,
     TResult Function()? logout,
@@ -353,6 +717,8 @@ class _$Register implements Register {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Login value) login,
+    required TResult Function(SendCode value) sendCode,
+    required TResult Function(UpdatePass value) updatePass,
     required TResult Function(Register value) register,
     required TResult Function(Logout value) logout,
   }) {
@@ -363,6 +729,8 @@ class _$Register implements Register {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Login value)? login,
+    TResult? Function(SendCode value)? sendCode,
+    TResult? Function(UpdatePass value)? updatePass,
     TResult? Function(Register value)? register,
     TResult? Function(Logout value)? logout,
   }) {
@@ -373,6 +741,8 @@ class _$Register implements Register {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Login value)? login,
+    TResult Function(SendCode value)? sendCode,
+    TResult Function(UpdatePass value)? updatePass,
     TResult Function(Register value)? register,
     TResult Function(Logout value)? logout,
     required TResult orElse(),
@@ -435,6 +805,9 @@ class _$Logout implements Logout {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String email, String password) login,
+    required TResult Function(String email) sendCode,
+    required TResult Function(String email, String code, String newPass)
+        updatePass,
     required TResult Function(String email, String password, String displayName)
         register,
     required TResult Function() logout,
@@ -446,6 +819,8 @@ class _$Logout implements Logout {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String email, String password)? login,
+    TResult? Function(String email)? sendCode,
+    TResult? Function(String email, String code, String newPass)? updatePass,
     TResult? Function(String email, String password, String displayName)?
         register,
     TResult? Function()? logout,
@@ -457,6 +832,8 @@ class _$Logout implements Logout {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String email, String password)? login,
+    TResult Function(String email)? sendCode,
+    TResult Function(String email, String code, String newPass)? updatePass,
     TResult Function(String email, String password, String displayName)?
         register,
     TResult Function()? logout,
@@ -472,6 +849,8 @@ class _$Logout implements Logout {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Login value) login,
+    required TResult Function(SendCode value) sendCode,
+    required TResult Function(UpdatePass value) updatePass,
     required TResult Function(Register value) register,
     required TResult Function(Logout value) logout,
   }) {
@@ -482,6 +861,8 @@ class _$Logout implements Logout {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Login value)? login,
+    TResult? Function(SendCode value)? sendCode,
+    TResult? Function(UpdatePass value)? updatePass,
     TResult? Function(Register value)? register,
     TResult? Function(Logout value)? logout,
   }) {
@@ -492,6 +873,8 @@ class _$Logout implements Logout {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Login value)? login,
+    TResult Function(SendCode value)? sendCode,
+    TResult Function(UpdatePass value)? updatePass,
     TResult Function(Register value)? register,
     TResult Function(Logout value)? logout,
     required TResult orElse(),

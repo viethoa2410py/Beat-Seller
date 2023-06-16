@@ -1,4 +1,4 @@
-package com.sangvaleap.beatSeller
+package com.viethoa.xstudio
 
 import io.flutter.embedding.android.FlutterActivity
 

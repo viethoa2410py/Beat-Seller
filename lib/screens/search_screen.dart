@@ -51,6 +51,7 @@ class _SearchScreenState extends State<SearchScreen> {
           buildSearch(),
           Expanded(
             child: ListView.builder(
+              padding: const EdgeInsets.only(bottom: 50),
               itemCount: beats.length,
               itemBuilder: (context, index) {
                 final beat = beats[index];

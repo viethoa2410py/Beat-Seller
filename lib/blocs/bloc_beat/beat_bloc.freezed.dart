@@ -18,18 +18,21 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$BeatEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(BeatModel beat) editBeat,
     required TResult Function(BeatModel beat) uploadBeat,
     required TResult Function(UploadStatus status) changeStatus,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(BeatModel beat)? editBeat,
     TResult? Function(BeatModel beat)? uploadBeat,
     TResult? Function(UploadStatus status)? changeStatus,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(BeatModel beat)? editBeat,
     TResult Function(BeatModel beat)? uploadBeat,
     TResult Function(UploadStatus status)? changeStatus,
     required TResult orElse(),
@@ -37,18 +40,21 @@ mixin _$BeatEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(EditBeat value) editBeat,
     required TResult Function(UploadBeat value) uploadBeat,
     required TResult Function(ChangeStatus value) changeStatus,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(EditBeat value)? editBeat,
     TResult? Function(UploadBeat value)? uploadBeat,
     TResult? Function(ChangeStatus value)? changeStatus,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(EditBeat value)? editBeat,
     TResult Function(UploadBeat value)? uploadBeat,
     TResult Function(ChangeStatus value)? changeStatus,
     required TResult orElse(),
@@ -71,6 +77,144 @@ class _$BeatEventCopyWithImpl<$Res, $Val extends BeatEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+}
+
+/// @nodoc
+abstract class _$$EditBeatCopyWith<$Res> {
+  factory _$$EditBeatCopyWith(
+          _$EditBeat value, $Res Function(_$EditBeat) then) =
+      __$$EditBeatCopyWithImpl<$Res>;
+  @useResult
+  $Res call({BeatModel beat});
+}
+
+/// @nodoc
+class __$$EditBeatCopyWithImpl<$Res>
+    extends _$BeatEventCopyWithImpl<$Res, _$EditBeat>
+    implements _$$EditBeatCopyWith<$Res> {
+  __$$EditBeatCopyWithImpl(_$EditBeat _value, $Res Function(_$EditBeat) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? beat = null,
+  }) {
+    return _then(_$EditBeat(
+      null == beat
+          ? _value.beat
+          : beat // ignore: cast_nullable_to_non_nullable
+              as BeatModel,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$EditBeat implements EditBeat {
+  const _$EditBeat(this.beat);
+
+  @override
+  final BeatModel beat;
+
+  @override
+  String toString() {
+    return 'BeatEvent.editBeat(beat: $beat)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$EditBeat &&
+            (identical(other.beat, beat) || other.beat == beat));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, beat);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$EditBeatCopyWith<_$EditBeat> get copyWith =>
+      __$$EditBeatCopyWithImpl<_$EditBeat>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(BeatModel beat) editBeat,
+    required TResult Function(BeatModel beat) uploadBeat,
+    required TResult Function(UploadStatus status) changeStatus,
+  }) {
+    return editBeat(beat);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(BeatModel beat)? editBeat,
+    TResult? Function(BeatModel beat)? uploadBeat,
+    TResult? Function(UploadStatus status)? changeStatus,
+  }) {
+    return editBeat?.call(beat);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(BeatModel beat)? editBeat,
+    TResult Function(BeatModel beat)? uploadBeat,
+    TResult Function(UploadStatus status)? changeStatus,
+    required TResult orElse(),
+  }) {
+    if (editBeat != null) {
+      return editBeat(beat);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(EditBeat value) editBeat,
+    required TResult Function(UploadBeat value) uploadBeat,
+    required TResult Function(ChangeStatus value) changeStatus,
+  }) {
+    return editBeat(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(EditBeat value)? editBeat,
+    TResult? Function(UploadBeat value)? uploadBeat,
+    TResult? Function(ChangeStatus value)? changeStatus,
+  }) {
+    return editBeat?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(EditBeat value)? editBeat,
+    TResult Function(UploadBeat value)? uploadBeat,
+    TResult Function(ChangeStatus value)? changeStatus,
+    required TResult orElse(),
+  }) {
+    if (editBeat != null) {
+      return editBeat(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class EditBeat implements BeatEvent {
+  const factory EditBeat(final BeatModel beat) = _$EditBeat;
+
+  BeatModel get beat;
+  @JsonKey(ignore: true)
+  _$$EditBeatCopyWith<_$EditBeat> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -137,6 +281,7 @@ class _$UploadBeat implements UploadBeat {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(BeatModel beat) editBeat,
     required TResult Function(BeatModel beat) uploadBeat,
     required TResult Function(UploadStatus status) changeStatus,
   }) {
@@ -146,6 +291,7 @@ class _$UploadBeat implements UploadBeat {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(BeatModel beat)? editBeat,
     TResult? Function(BeatModel beat)? uploadBeat,
     TResult? Function(UploadStatus status)? changeStatus,
   }) {
@@ -155,6 +301,7 @@ class _$UploadBeat implements UploadBeat {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(BeatModel beat)? editBeat,
     TResult Function(BeatModel beat)? uploadBeat,
     TResult Function(UploadStatus status)? changeStatus,
     required TResult orElse(),
@@ -168,6 +315,7 @@ class _$UploadBeat implements UploadBeat {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(EditBeat value) editBeat,
     required TResult Function(UploadBeat value) uploadBeat,
     required TResult Function(ChangeStatus value) changeStatus,
   }) {
@@ -177,6 +325,7 @@ class _$UploadBeat implements UploadBeat {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(EditBeat value)? editBeat,
     TResult? Function(UploadBeat value)? uploadBeat,
     TResult? Function(ChangeStatus value)? changeStatus,
   }) {
@@ -186,6 +335,7 @@ class _$UploadBeat implements UploadBeat {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(EditBeat value)? editBeat,
     TResult Function(UploadBeat value)? uploadBeat,
     TResult Function(ChangeStatus value)? changeStatus,
     required TResult orElse(),
@@ -270,6 +420,7 @@ class _$ChangeStatus implements ChangeStatus {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(BeatModel beat) editBeat,
     required TResult Function(BeatModel beat) uploadBeat,
     required TResult Function(UploadStatus status) changeStatus,
   }) {
@@ -279,6 +430,7 @@ class _$ChangeStatus implements ChangeStatus {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(BeatModel beat)? editBeat,
     TResult? Function(BeatModel beat)? uploadBeat,
     TResult? Function(UploadStatus status)? changeStatus,
   }) {
@@ -288,6 +440,7 @@ class _$ChangeStatus implements ChangeStatus {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(BeatModel beat)? editBeat,
     TResult Function(BeatModel beat)? uploadBeat,
     TResult Function(UploadStatus status)? changeStatus,
     required TResult orElse(),
@@ -301,6 +454,7 @@ class _$ChangeStatus implements ChangeStatus {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(EditBeat value) editBeat,
     required TResult Function(UploadBeat value) uploadBeat,
     required TResult Function(ChangeStatus value) changeStatus,
   }) {
@@ -310,6 +464,7 @@ class _$ChangeStatus implements ChangeStatus {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(EditBeat value)? editBeat,
     TResult? Function(UploadBeat value)? uploadBeat,
     TResult? Function(ChangeStatus value)? changeStatus,
   }) {
@@ -319,6 +474,7 @@ class _$ChangeStatus implements ChangeStatus {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(EditBeat value)? editBeat,
     TResult Function(UploadBeat value)? uploadBeat,
     TResult Function(ChangeStatus value)? changeStatus,
     required TResult orElse(),

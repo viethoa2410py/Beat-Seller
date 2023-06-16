@@ -10,6 +10,7 @@ part 'beat_bloc.freezed.dart';
 class BeatBloc extends Bloc<BeatEvent, BeatState> {
   BeatBloc() : super(BeatState.initial()) {
     on<UploadBeat>(_updateBeat);
+    on<EditBeat>(_editBeat);
     on<ChangeStatus>(_changeStatus);
   }
 
@@ -17,6 +18,17 @@ class BeatBloc extends Bloc<BeatEvent, BeatState> {
     try {
       emit(state.copyWith(uploadStatus: UploadStatus.loading));
       await BeatRepository.uploadBeat(event.beat);
+      emit(state.copyWith(uploadStatus: UploadStatus.complete));
+    } catch (e) {
+      emit(state.copyWith(uploadStatus: UploadStatus.error));
+    }
+    emit(state.copyWith(uploadStatus: UploadStatus.idle));
+  }
+
+  _editBeat(EditBeat event, Emitter<BeatState> emit) async {
+    try {
+      emit(state.copyWith(uploadStatus: UploadStatus.loading));
+      await BeatRepository.editBeat(event.beat);
       emit(state.copyWith(uploadStatus: UploadStatus.complete));
     } catch (e) {
       emit(state.copyWith(uploadStatus: UploadStatus.error));

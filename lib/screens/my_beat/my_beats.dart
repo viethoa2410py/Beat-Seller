@@ -42,7 +42,9 @@ class _MyBeatsState extends State<MyBeats> {
                       },
                       child: FutureBuilder(
                           future: BeatRepository.getMyBeats(
-                              UserRepository.currentUser!.id),
+                              UserRepository.currentUser != null
+                                  ? UserRepository.currentUser!.id
+                                  : ''),
                           builder: (context,
                               AsyncSnapshot<List<BeatModel>> snapshot) {
                             if (snapshot.connectionState !=
@@ -60,6 +62,18 @@ class _MyBeatsState extends State<MyBeats> {
                                           vertical: 10, horizontal: 10),
                                       child: MyBeatItem(
                                         data: snapshot.data![index],
+                                        onEdit: () async {
+                                          await Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      CreateBeat(
+                                                        beatEdit: snapshot
+                                                            .data![index],
+                                                      )));
+
+                                          setState(() {});
+                                        },
                                         onTap: () async {
                                           await Navigator.push(
                                               context,
@@ -87,7 +101,8 @@ class _MyBeatsState extends State<MyBeats> {
                               }
                             }
                           }),
-                    )
+                    ),
+                    const SizedBox(height: 50),
                   ],
                 ),
               ),
@@ -168,7 +183,8 @@ class _AppBarWidget extends StatelessWidget {
         ),
       ),
       actions: [
-        if (UserRepository.currentUser!.role != "Admin")
+        if (UserRepository.currentUser != null &&
+            UserRepository.currentUser!.role != "Admin")
           Padding(
             padding: const EdgeInsets.only(right: 20),
             child: NotificationBox(

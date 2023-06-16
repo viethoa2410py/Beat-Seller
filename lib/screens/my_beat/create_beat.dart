@@ -19,7 +19,8 @@ import 'package:intl/intl.dart';
 import 'dialog_type_beat.dart';
 
 class CreateBeat extends StatefulWidget {
-  const CreateBeat({Key? key}) : super(key: key);
+  final BeatModel? beatEdit;
+  const CreateBeat({Key? key, this.beatEdit}) : super(key: key);
 
   @override
   State<CreateBeat> createState() => _CreateBeatState();
@@ -38,10 +39,24 @@ class _CreateBeatState extends State<CreateBeat> {
   String? pathFileImage;
   bool checked1 = false;
   bool checked2 = false;
-  final BeatModel newBeat = BeatModel.initial(UserRepository.currentUser!);
+  BeatModel newBeat = BeatModel.initial(UserRepository.currentUser!);
   @override
   void initState() {
     _getCurrentDate();
+    if (widget.beatEdit != null) {
+      setState(() {
+        newBeat = widget.beatEdit!;
+        _titleController.text = widget.beatEdit!.name;
+        _authorNameController.text = widget.beatEdit!.producer.name;
+        _authorEmailController.text = widget.beatEdit!.producer.email;
+        _priceController.text = widget.beatEdit!.price.toString();
+        _discountController.text = widget.beatEdit!.discount.toString();
+        _descriptionController.text = widget.beatEdit!.description;
+        pathFileBeat = widget.beatEdit!.thumbnail.audio.split('/').last;
+        pathFileImage = widget.beatEdit!.thumbnail.image.split('/').last;
+        type = widget.beatEdit!.type.name;
+      });
+    }
     super.initState();
   }
 
@@ -94,13 +109,21 @@ class _CreateBeatState extends State<CreateBeat> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Column(
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Upload your new beat",
-                            style: TextStyle(color: primary, fontSize: 28)),
-                        Text("Uploading as admin",
-                            style: TextStyle(color: primary, fontSize: 16)),
+                        Text(
+                            widget.beatEdit == null
+                                ? "Upload your new beat"
+                                : "Edit your beat",
+                            style:
+                                const TextStyle(color: primary, fontSize: 28)),
+                        Text(
+                            widget.beatEdit == null
+                                ? "Uploading as admin"
+                                : "Editing as admin",
+                            style:
+                                const TextStyle(color: primary, fontSize: 16)),
                       ],
                     ),
                     IconButton(
@@ -204,32 +227,34 @@ class _CreateBeatState extends State<CreateBeat> {
                       ],
                     ),
                   ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        "Upload date".desc().marg(0, 0, 20),
-                        Container(
-                          height: 40,
-                          decoration: BoxDecoration(
-                              border: Border.all(color: inActiveColor),
-                              borderRadius: BorderRadius.circular(8)),
-                          margin: const EdgeInsets.only(top: 8),
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(uploadDate ?? "DD/MM/YYYY",
-                                  style: const TextStyle(color: labelColor)),
-                              const Icon(Icons.calendar_today_outlined,
-                                  color: labelColor)
-                            ],
+                  if (widget.beatEdit == null) ...[
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          "Upload date".desc().marg(0, 0, 20),
+                          Container(
+                            height: 40,
+                            decoration: BoxDecoration(
+                                border: Border.all(color: inActiveColor),
+                                borderRadius: BorderRadius.circular(8)),
+                            margin: const EdgeInsets.only(top: 8),
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(uploadDate ?? "DD/MM/YYYY",
+                                    style: const TextStyle(color: labelColor)),
+                                const Icon(Icons.calendar_today_outlined,
+                                    color: labelColor)
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
+                  ],
                 ],
               ),
               Column(
@@ -237,9 +262,11 @@ class _CreateBeatState extends State<CreateBeat> {
                 children: [
                   "Import beat here".desc().marg(0, 0, 20),
                   InkWell(
-                    onTap: () {
-                      _pickFile();
-                    },
+                    onTap: widget.beatEdit == null
+                        ? () {
+                            _pickFile();
+                          }
+                        : null,
                     child: Container(
                       height: 40,
                       decoration: BoxDecoration(
@@ -252,6 +279,7 @@ class _CreateBeatState extends State<CreateBeat> {
                           pathFileBeat != null
                               ? pathFileBeat!.split('/').last
                               : "Wav or mp3",
+                          overflow: TextOverflow.ellipsis,
                           style: const TextStyle(color: labelColor)),
                     ),
                   ),
@@ -262,9 +290,11 @@ class _CreateBeatState extends State<CreateBeat> {
                 children: [
                   "Import image here".desc().marg(0, 0, 20),
                   InkWell(
-                    onTap: () {
-                      _pickImage();
-                    },
+                    onTap: widget.beatEdit == null
+                        ? () {
+                            _pickImage();
+                          }
+                        : null,
                     child: Container(
                       height: 40,
                       alignment: Alignment.centerLeft,
@@ -277,6 +307,7 @@ class _CreateBeatState extends State<CreateBeat> {
                           pathFileImage != null
                               ? pathFileImage!.split('/').last
                               : "Png or img",
+                          overflow: TextOverflow.ellipsis,
                           style: const TextStyle(color: labelColor)),
                     ),
                   ),
@@ -332,8 +363,8 @@ class _CreateBeatState extends State<CreateBeat> {
                   }
                 },
               ).marg(0, 0, 6, 20),
-              Container(
-                child: Row(
+              if (widget.beatEdit == null) ...[
+                Row(
                   children: [
                     InkWell(
                         onTap: () {
@@ -378,9 +409,7 @@ class _CreateBeatState extends State<CreateBeat> {
                     )
                   ],
                 ),
-              ),
-              Container(
-                child: Row(
+                Row(
                   children: [
                     InkWell(
                         onTap: () {
@@ -411,27 +440,68 @@ class _CreateBeatState extends State<CreateBeat> {
                     )
                   ],
                 ),
-              ),
+              ],
               const SizedBox(height: 50),
-              BlocConsumer<BeatBloc, BeatState>(
-                listener: (context, state) {
-                  if (state.uploadStatus == UploadStatus.complete) {
-                    Navigator.pop(context);
-                  }
-                },
-                builder: (context, state) {
-                  if (state.uploadStatus == UploadStatus.loading) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                  return InkWell(
+              if (widget.beatEdit == null)
+                BlocConsumer<BeatBloc, BeatState>(
+                  listener: (context, state) {
+                    if (state.uploadStatus == UploadStatus.complete) {
+                      Navigator.pop(context);
+                    }
+                  },
+                  builder: (context, state) {
+                    if (state.uploadStatus == UploadStatus.loading) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                    return InkWell(
+                      onTap: () {
+                        if (widget.beatEdit != null) {
+                          AppBloc.beatBloc.add(EditBeat(newBeat));
+                        } else {
+                          if (checked1 && checked2) {
+                            AppBloc.beatBloc.add(UploadBeat(newBeat));
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                ExpandedSnackBar.failureSnackBar(context,
+                                    "You miss the app terms! Please check it."));
+                          }
+                        }
+                      },
+                      child: Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: primary),
+                        alignment: Alignment.center,
+                        child: Text(widget.beatEdit == null ? "Upload" : "Edit",
+                            style: const TextStyle(
+                                color: textBoxColor, fontSize: 18)),
+                      ),
+                    );
+                  },
+                ),
+              const SizedBox(height: 30)
+            ],
+          )),
+      bottomSheet: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        height: 100,
+        child: BlocConsumer<BeatBloc, BeatState>(
+          listener: (context, state) {
+            if (state.uploadStatus == UploadStatus.complete) {
+              Navigator.pop(context);
+            }
+          },
+          builder: (context, state) {
+            if (state.uploadStatus == UploadStatus.loading) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            return Row(
+              children: [
+                Expanded(
+                  child: InkWell(
                     onTap: () {
-                      if (checked1 && checked2) {
-                        AppBloc.beatBloc.add(UploadBeat(newBeat));
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            ExpandedSnackBar.failureSnackBar(context,
-                                "You miss the app terms! Please check it."));
-                      }
+                      AppBloc.beatBloc.add(EditBeat(newBeat));
                     },
                     child: Container(
                       height: 50,
@@ -439,15 +509,38 @@ class _CreateBeatState extends State<CreateBeat> {
                           borderRadius: BorderRadius.circular(10),
                           color: primary),
                       alignment: Alignment.center,
-                      child: const Text("Upload",
-                          style: TextStyle(color: textBoxColor, fontSize: 18)),
+                      child: Text(widget.beatEdit == null ? "Upload" : "Edit",
+                          style: const TextStyle(
+                              color: textBoxColor, fontSize: 18)),
                     ),
-                  );
-                },
-              ),
-              const SizedBox(height: 30)
-            ],
-          )),
+                  ),
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
+                Expanded(
+                  child: InkWell(
+                    onTap: () {
+                      newBeat.isSold = !newBeat.isSold;
+                      AppBloc.beatBloc.add(EditBeat(newBeat));
+                    },
+                    child: Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.red),
+                      alignment: Alignment.center,
+                      child: Text(newBeat.isSold ? "Active" : "Sold out",
+                          style: const TextStyle(
+                              color: textBoxColor, fontSize: 18)),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
+      ),
     );
   }
 }

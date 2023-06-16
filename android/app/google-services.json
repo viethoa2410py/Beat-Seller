@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:768977853381:android:79eb7c9039b68517e609ac",
         "android_client_info": {
-          "package_name": "com.sangvaleap.beatSeller"
+          "package_name": "com.viethoa.xstudio"
         }
       },
       "oauth_client": [
@@ -35,7 +35,7 @@
               "client_id": "768977853381-9e9m802j698o19gdt3fvnv31fp27vjd5.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.sangvaleap.beatSeller"
+                "bundle_id": "com.viethoa.xstudio"
               }
             }
           ]
@@ -46,7 +46,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:768977853381:android:df2b075129a73319e609ac",
         "android_client_info": {
-          "package_name": "com.sangvaleap.beatSeller"
+          "package_name": "com.viethoa.xstudio"
         }
       },
       "oauth_client": [
@@ -71,7 +71,7 @@
               "client_id": "768977853381-9e9m802j698o19gdt3fvnv31fp27vjd5.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.sangvaleap.beatSeller"
+                "bundle_id": "com.viethoa.xstudio"
               }
             }
           ]

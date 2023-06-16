@@ -9,19 +9,22 @@ class UserModel {
   late String email;
   late String displayName;
   late String role;
+  String? avatar;
   UserModel.fromJson(json) {
     id = json['uid'];
     displayName = json['displayName'] ?? "Display Name";
     email = json['email'];
     role = json["role"];
+    avatar = json['avatar'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['uid'] = this.id;
-    data['email'] = this.email;
-    data['displayName'] = this.displayName;
-    data['role'] = this.role;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['uid'] = id;
+    data['email'] = email;
+    data['displayName'] = displayName;
+    data['role'] = role;
+    data['avatar'] = avatar;
     return data;
   }
 }

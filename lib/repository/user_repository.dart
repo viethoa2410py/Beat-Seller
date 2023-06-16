@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:beatSeller/api/api.dart';
 import 'package:beatSeller/models/model_user.dart';
@@ -24,37 +26,45 @@ class UserRepository {
   }
 
   static Future<UserModel?> login(email, password) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    UserCredential user = await FirebaseAuth.instance
-        .signInWithEmailAndPassword(email: email, password: password);
+    try {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      UserCredential user = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
 
-    if (user.user != null) {
-      var result = await getUser(user.user!.uid);
+      if (user.user != null) {
+        var result = await getUser(user.user!.uid);
 
-      currentUser = result;
-      prefs.setBool('isLogin', true);
-      prefs.setString('userId', currentUser!.id);
-      return result;
+        currentUser = result;
+        prefs.setBool('isLogin', true);
+        prefs.setString('userId', currentUser!.id);
+        return result;
+      }
+    } catch (e) {
+      print(e);
     }
     return null;
   }
 
   static Future<UserModel?> register(email, password, displayName) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    UserCredential user = await FirebaseAuth.instance
-        .createUserWithEmailAndPassword(email: email, password: password);
+    try {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      UserCredential user = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password);
 
-    if (user.user != null) {
-      var user0 = UserModel(
-          id: user.user!.uid,
-          email: user.user!.email!,
-          displayName: displayName,
-          role: "Customer");
-      await Api.createUser(user0);
-      currentUser = user0;
-      prefs.setBool('isLogin', true);
-      prefs.setString('userId', currentUser!.id);
-      return user0;
+      if (user.user != null) {
+        var user0 = UserModel(
+            id: user.user!.uid,
+            email: user.user!.email!,
+            displayName: displayName,
+            role: "Customer");
+        await Api.createUser(user0);
+        currentUser = user0;
+        prefs.setBool('isLogin', true);
+        prefs.setString('userId', currentUser!.id);
+        return user0;
+      }
+    } catch (e) {
+      print(e);
     }
     return null;
   }
@@ -62,5 +72,37 @@ class UserRepository {
   static getUser(userId) async {
     var result = await Api.getUser(userId);
     return UserModel.fromJson(result);
+  }
+
+  static updateInfo(File? image) async {
+    try {
+      if (image != null) {
+        var path = await Api.uploadFile(image);
+        currentUser!.avatar = path;
+      }
+      await Api.updateUser(currentUser!);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  static Future<bool> sentCode(String email) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+    } catch (e) {
+      print(e);
+    }
+    return false;
+  }
+
+  static Future<bool> updatePass(
+      String email, String code, String newPass) async {
+    try {
+      await FirebaseAuth.instance
+          .confirmPasswordReset(code: code, newPassword: newPass);
+    } catch (e) {
+      print(e);
+    }
+    return false;
   }
 }

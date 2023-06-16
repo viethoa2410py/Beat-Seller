@@ -12,10 +12,31 @@ class BeatRepository {
 
   BeatRepository._internal();
 
-  static Future<List<BeatModel>> getNewBeats() async {
+  static Future<List<BeatModel>> getNewBeats(String? type) async {
     try {
       final list = <BeatModel>[];
-      var data = await Api.getDataNewBeats();
+      var data = await Api.getDataAllBeats();
+      if (data != null) {
+        data.forEach(
+            ((key, value) => list.add(BeatModel.fromJson(value, key))));
+        list.removeWhere((element) => element.isSold);
+        if (type != null) {
+          list.removeWhere((element) => element.type.name != type);
+        }
+        list.sort((a, b) => b.createDate.compareTo(a.createDate));
+      }
+
+      return list;
+    } catch (e) {
+      print(e);
+      return [];
+    }
+  }
+
+  static Future<List<BeatModel>> getRecommendedBeats() async {
+    try {
+      final list = <BeatModel>[];
+      var data = await Api.getDataAllBeats();
       if (data != null) {
         data.forEach(
             ((key, value) => list.add(BeatModel.fromJson(value, key))));
@@ -30,22 +51,25 @@ class BeatRepository {
     }
   }
 
-  static Future<List<BeatModel>> getRecommendedBeats() async {
+  static Future<BeatModel?> getBeatByType(String type) async {
+    final list = <BeatModel>[];
     try {
-      final list = <BeatModel>[];
-      var data = await Api.getDataRecommendedBeats();
-      if (data != null) {
-        data.forEach(
-            ((key, value) => list.add(BeatModel.fromJson(value, key))));
-        list.removeWhere((element) => element.isSold);
-        list.sort((a, b) => b.createDate.compareTo(a.createDate));
-      }
+      var data = await Api.getDataAllBeats();
 
-      return list;
+      if (data != null) {
+        data.forEach(((key, value) {
+          if (value["type"]['name'] == type) {
+            list.add(BeatModel.fromJson(value, key));
+          }
+        }));
+      }
     } catch (e) {
       print(e);
-      return [];
     }
+    if (list.isNotEmpty) {
+      return (list..shuffle()).first;
+    }
+    return null;
   }
 
   static Future<List<BeatModel>> getAllBeats() async {
@@ -71,7 +95,7 @@ class BeatRepository {
     try {
       final list = <BeatModel>[];
       final listMyBeats = <BeatModel>[];
-      var data = await Api.getDataMyBeats();
+      var data = await Api.getDataAllBeats();
       if (data != null) {
         data.forEach(
             ((key, value) => list.add(BeatModel.fromJson(value, key))));
@@ -80,7 +104,6 @@ class BeatRepository {
             listMyBeats.add(element);
           }
         }
-        listMyBeats.removeWhere((element) => element.isSold);
         listMyBeats.sort((a, b) => b.createDate.compareTo(a.createDate));
       }
 
@@ -111,7 +134,6 @@ class BeatRepository {
   }
 
   static Future<String> uploadFile(String filePath) async {
-    print(filePath);
     var file = File(filePath);
     var path = await Api.uploadFile(file);
     return path ?? '';
@@ -123,6 +145,14 @@ class BeatRepository {
       beat0.thumbnail.audio = await uploadFile(beat.thumbnail.audio);
       beat0.thumbnail.image = await uploadFile(beat.thumbnail.image);
       await Api.uploadBeat(beat0);
+    } catch (e) {
+      print("[ERROR]: $e");
+    }
+  }
+
+  static Future editBeat(BeatModel beat) async {
+    try {
+      await Api.editBeat(beat);
     } catch (e) {
       print("[ERROR]: $e");
     }

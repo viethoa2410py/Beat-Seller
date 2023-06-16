@@ -18,6 +18,8 @@ class AuthenticationBloc
     on<Login>(_login);
     on<Register>(_register);
     on<Logout>(_logout);
+    on<SendCode>(_sentCode);
+    on<UpdatePass>(_updatePass);
   }
 
   final FireBaseAuthRepository _fireBaseAuthRepository =
@@ -35,6 +37,10 @@ class AuthenticationBloc
 
         if (user != null) {
           emit(state.copyWith(status: AuthStatus.logged));
+        } else {
+          emit(state.copyWith(
+              status: AuthStatus.error,
+              errorString: 'Email or password is incorrect'));
         }
       } on FirebaseAuthException catch (e) {
         emit(state.copyWith(status: AuthStatus.error, errorString: e.code));
@@ -72,5 +78,13 @@ class AuthenticationBloc
     _fireBaseAuthRepository.signOut();
     UserRepository.currentUser = null;
     emit(state.copyWith(status: AuthStatus.unknown));
+  }
+
+  _sentCode(SendCode event, Emitter<AuthenticationState> emit) async {
+    await UserRepository.sentCode(event.email);
+  }
+
+  _updatePass(UpdatePass event, Emitter<AuthenticationState> emit) async {
+    await UserRepository.updatePass(event.email, event.code, event.newPass);
   }
 }

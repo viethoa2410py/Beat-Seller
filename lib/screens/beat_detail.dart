@@ -26,13 +26,13 @@ class _BeatDetailState extends State<BeatDetail> {
 
   @override
   void dispose() {
-    AppBloc.audioPlayerBloc.add(PauseAudio());
+    AppBloc.audioPlayerBloc.add(const PauseAudio());
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final _size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
         body: Stack(
@@ -46,9 +46,9 @@ class _BeatDetailState extends State<BeatDetail> {
                   child: Container(
                     child: CustomImage(
                       widget.beat.thumbnail.image,
-                      width: _size.width,
+                      width: size.width,
                       radius: 0,
-                      height: _size.height / 4,
+                      height: size.height / 4,
                     ),
                   ),
                 ),
@@ -68,7 +68,7 @@ class _BeatDetailState extends State<BeatDetail> {
                                 widget.beat.name,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: textColor,
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600),
@@ -84,10 +84,10 @@ class _BeatDetailState extends State<BeatDetail> {
                                     onPressed: () {
                                       if (audioState == AudioState.playing) {
                                         AppBloc.audioPlayerBloc
-                                            .add(PauseAudio());
+                                            .add(const PauseAudio());
                                       } else {
                                         AppBloc.audioPlayerBloc
-                                            .add(PlayAudio());
+                                            .add(const PlayAudio());
                                       }
                                     },
                                     icon: Icon(audioState == AudioState.playing
@@ -97,7 +97,7 @@ class _BeatDetailState extends State<BeatDetail> {
                             )
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 5,
                         ),
                         _DescWidget(widget: widget)
@@ -109,14 +109,15 @@ class _BeatDetailState extends State<BeatDetail> {
             ),
             Positioned(
                 child: IconButton(
-              icon: Icon(Icons.cancel_outlined),
+              icon: const Icon(Icons.cancel_outlined),
               color: primary,
               onPressed: () {
-                AppBloc.audioPlayerBloc.add(PauseAudio());
+                AppBloc.audioPlayerBloc.add(const PauseAudio());
                 Navigator.pop(context);
               },
             )),
-            if (UserRepository.currentUser!.role != "Admin")
+            if (UserRepository.currentUser != null &&
+                UserRepository.currentUser!.role != "Admin")
               Align(
                 alignment: AlignmentDirectional.bottomCenter,
                 child: _ButtonWidget(
@@ -137,7 +138,7 @@ class _ButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 40,
-      margin: EdgeInsets.only(left: 20, right: 20, bottom: 40),
+      margin: const EdgeInsets.only(left: 20, right: 20, bottom: 40),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -148,7 +149,7 @@ class _ButtonWidget extends StatelessWidget {
                     UserRepository.currentUser!.id, beat);
                 ScaffoldMessenger.of(context).showSnackBar(
                     ExpandedSnackBar.successSnackBar(
-                        context, "Added " + beat.name + " to cart"));
+                        context, "Added ${beat.name} to cart"));
               },
               child: Container(
                 height: 40,
@@ -156,14 +157,14 @@ class _ButtonWidget extends StatelessWidget {
                     color: inActiveColor,
                     borderRadius: BorderRadius.circular(8)),
                 alignment: Alignment.center,
-                child: Text(
+                child: const Text(
                   "Add To Cart",
                   style: TextStyle(fontSize: 14, color: primary),
                 ),
               ),
             ),
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Expanded(
             child: InkWell(
               onTap: () {
@@ -179,7 +180,7 @@ class _ButtonWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: primary, borderRadius: BorderRadius.circular(8)),
                 alignment: Alignment.center,
-                child: Text(
+                child: const Text(
                   "Buy Now",
                   style: TextStyle(fontSize: 14, color: textBoxColor),
                 ),
@@ -205,7 +206,7 @@ class _DescWidget extends StatelessWidget {
         RichText(
           text: TextSpan(
               text: "Producer's name: ",
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
                 color: textColor,
                 fontWeight: FontWeight.bold,
@@ -213,27 +214,27 @@ class _DescWidget extends StatelessWidget {
               children: [
                 TextSpan(
                     text: widget.beat.producer.name,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 14,
                         color: textColor,
                         fontWeight: FontWeight.w500))
               ]),
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         Text(
           widget.beat.type.name,
-          style: TextStyle(fontSize: 12, color: textColor),
+          style: const TextStyle(fontSize: 12, color: textColor),
         ),
-        SizedBox(
+        const SizedBox(
           height: 5,
         ),
         Row(
           children: [
             Text(
               "\$${widget.beat.discount}",
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
                 color: primary,
@@ -244,7 +245,7 @@ class _DescWidget extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 5),
                 child: Text(
                   "\$${widget.beat.price}",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
                     decoration: TextDecoration.lineThrough,
@@ -254,13 +255,13 @@ class _DescWidget extends StatelessWidget {
               ),
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 5,
         ),
         RichText(
           text: TextSpan(
               text: "Description: ",
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 12,
                 color: textColor,
                 fontWeight: FontWeight.w500,
@@ -268,7 +269,7 @@ class _DescWidget extends StatelessWidget {
               children: [
                 TextSpan(
                     text: widget.beat.description,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.normal,
                       color: textColor,

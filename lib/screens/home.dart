@@ -1,16 +1,18 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:beatSeller/blocs/bloc.dart';
 import 'package:beatSeller/models/model.dart';
 import 'package:beatSeller/repository/repository.dart';
 import 'package:beatSeller/screens/my_cart/my_cart.dart';
 import 'package:beatSeller/theme/color.dart';
 import 'package:beatSeller/utils/data.dart';
-import 'package:beatSeller/widgets/type_beat_item.dart';
 import 'package:beatSeller/widgets/feature_item.dart';
 import 'package:beatSeller/widgets/notification_box.dart';
 import 'package:beatSeller/widgets/recommend_item.dart';
+import 'package:beatSeller/widgets/type_beat_item.dart';
 
 import 'beat_detail.dart';
 
@@ -23,6 +25,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String? type;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,7 +77,8 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
           const Spacer(),
-          if (UserRepository.currentUser?.role != "Admin")
+          if (UserRepository.currentUser != null &&
+              UserRepository.currentUser!.role != "Admin")
             NotificationBox(
               notifiedNumber: 1,
               onTap: () async {
@@ -115,7 +119,20 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            const _TypeOfBeatWidget(),
+            _TypeOfBeatWidget(
+              selected: type,
+              onTap: (value) {
+                if (type == value) {
+                  setState(() {
+                    type = null;
+                  });
+                } else {
+                  setState(() {
+                    type = value;
+                  });
+                }
+              },
+            ),
             const SizedBox(
               height: 10,
             ),
@@ -125,13 +142,15 @@ class _HomePageState extends State<HomePage> {
                   setState(() {});
                 }
               },
-              child: const Column(
+              child: Column(
                 children: [
-                  _NewBeatWidget(),
-                  SizedBox(
+                  _NewBeatWidget(
+                    type: type,
+                  ),
+                  const SizedBox(
                     height: 15,
                   ),
-                  _RecommendedBeatWidget(),
+                  const _RecommendedBeatWidget(),
                 ],
               ),
             ),
@@ -162,10 +181,6 @@ class _RecommendedBeatWidget extends StatelessWidget {
                     fontSize: 22,
                     fontWeight: FontWeight.w500,
                     color: labelColor),
-              ),
-              Text(
-                "See all",
-                style: TextStyle(fontSize: 14, color: labelColor),
               ),
             ],
           ),
@@ -211,15 +226,18 @@ class _RecommendedBeatWidget extends StatelessWidget {
                       );
                     }
                   }
-                }))
+                })),
+        const SizedBox(height: 50),
       ],
     );
   }
 }
 
 class _NewBeatWidget extends StatefulWidget {
+  final String? type;
   const _NewBeatWidget({
     Key? key,
+    required this.type,
   }) : super(key: key);
 
   @override
@@ -235,7 +253,7 @@ class _NewBeatWidgetState extends State<_NewBeatWidget> {
         const Padding(
           padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
           child: Text(
-            "New Beat",
+            "New Beats",
             style: TextStyle(
               color: labelColor,
               fontWeight: FontWeight.w500,
@@ -244,7 +262,7 @@ class _NewBeatWidgetState extends State<_NewBeatWidget> {
           ),
         ),
         FutureBuilder(
-            future: BeatRepository.getNewBeats(),
+            future: BeatRepository.getNewBeats(widget.type),
             builder: (context, AsyncSnapshot<List<BeatModel>> snapshot) {
               if (snapshot.connectionState != ConnectionState.done) {
                 return const Center(child: CircularProgressIndicator());
@@ -291,7 +309,13 @@ class _NewBeatWidgetState extends State<_NewBeatWidget> {
 }
 
 class _TypeOfBeatWidget extends StatelessWidget {
-  const _TypeOfBeatWidget({Key? key}) : super(key: key);
+  final Function(String) onTap;
+  final String? selected;
+  const _TypeOfBeatWidget({
+    Key? key,
+    required this.onTap,
+    required this.selected,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -306,7 +330,10 @@ class _TypeOfBeatWidget extends StatelessWidget {
               padding: const EdgeInsets.only(right: 8),
               child: TypeBeatItem(
                 data: types[index],
-                onTap: () async {},
+                isSelected: selected == types[index]['name'],
+                onTap: () {
+                  onTap(types[index]['name']);
+                },
               ),
             ),
           ),

@@ -34,6 +34,14 @@ class Api {
     }
   }
 
+  static Future<dynamic> updateUser(UserModel user) async {
+    try {
+      await _database.ref('users/${user.id}').update(user.toJson());
+    } catch (e) {
+      print(e);
+    }
+  }
+
   static Future<String?> uploadFile(File file) async {
     try {
       final nameFile = file.path.split('/').last;
@@ -47,37 +55,7 @@ class Api {
     }
   }
 
-  static Future<dynamic> getDataNewBeats() async {
-    try {
-      final snapshot = await _database.ref('beats').get();
-
-      return snapshot.value;
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  static Future<dynamic> getDataRecommendedBeats() async {
-    try {
-      final snapshot = await _database.ref('beats').get();
-
-      return snapshot.value;
-    } catch (e) {
-      print(e);
-    }
-  }
-
   static Future<dynamic> getDataAllBeats() async {
-    try {
-      final snapshot = await _database.ref('beats').get();
-
-      return snapshot.value;
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  static Future<dynamic> getDataMyBeats() async {
     try {
       final snapshot = await _database.ref('beats').get();
 
@@ -101,7 +79,19 @@ class Api {
     try {
       DatabaseReference newRef = _database.ref('beats').push();
       beat.id = newRef.key ?? "-1";
-      newRef.set(beat.toJson());
+      await newRef.set(beat.toJson());
+    } on FirebaseException catch (e) {
+      print("[ERROR FIREBASE]: ${e.message}");
+    } catch (e) {
+      print("[ERROR]: $e");
+    }
+  }
+
+  static Future<void> editBeat(BeatModel beat) async {
+    try {
+      DatabaseReference newRef = _database.ref('beats/${beat.key}');
+
+      await newRef.update(beat.toJson());
     } on FirebaseException catch (e) {
       print("[ERROR FIREBASE]: ${e.message}");
     } catch (e) {
